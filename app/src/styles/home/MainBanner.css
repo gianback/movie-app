@@ -1,0 +1,94 @@
+.MainBanner {
+  @apply bg-primary py-[5rem];
+  min-height: 100vh;
+  &-active {
+    /* animation-name: fadeIn;
+    animation-duration: 1s; */
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  &-noActive {
+    opacity: 0;
+  }
+  &-movie {
+    @apply grid grid-cols-2;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    transition: opacity 0.5s ease;
+    gap: 8rem;
+    &-pictures {
+      @apply flex;
+      picture {
+        img {
+          @apply w-full;
+        }
+        &:nth-child(2) {
+          @apply flex items-center;
+          margin-left: -10rem;
+        }
+      }
+    }
+    &-info {
+      @apply text-white flex flex-col justify-center;
+      h1 {
+        @apply text-[7rem] leading-[8rem] mb-[3rem];
+      }
+      p,
+      button,
+      a {
+        @apply text-[2rem];
+      }
+    }
+    &-btn {
+      @apply font-semibold inline-flex bg-orange-600 px-[3rem] py-[2rem] mt-[3rem] isolate relative overflow-hidden;
+      border-radius: 1rem;
+      &::after {
+        @apply absolute inset-0;
+        content: "";
+        background: linear-gradient(
+          90deg,
+          rgba(107, 63, 251, 1) 0%,
+          rgba(25, 13, 41, 1) 100%
+        );
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.8s ease;
+      }
+      @media (hover: hover) {
+        &:hover {
+          &::after {
+            opacity: 1;
+          }
+        }
+      }
+      &.review {
+        @apply ml-[4rem];
+      }
+    }
+    &-swiper {
+      @apply text-center;
+      picture {
+        @apply flex items-center justify-center flex-col;
+        margin-top: 8rem;
+        img {
+          border-radius: 1rem;
+        }
+      }
+      h2 {
+        @apply text-[2rem] text-white leading-[2.8rem] mt-[1.5rem];
+      }
+      span {
+        @apply text-[2rem] text-white leading-[2rem];
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

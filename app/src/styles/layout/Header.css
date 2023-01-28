@@ -1,0 +1,14 @@
+.Header {
+  @apply bg-thirty text-white py-[3rem] sticky top-0;
+  &-nav {
+    @apply flex justify-between items-center;
+  }
+  &-ul {
+    @apply flex items-center justify-center gap-[10rem] font-medium;
+
+    a {
+      @apply text-[1.5rem] uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+.Container {
+  @apply mx-auto;
+  width: 90%;
+  max-width: 150rem;
+}
