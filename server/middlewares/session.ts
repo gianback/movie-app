@@ -15,14 +15,15 @@ export const checkJwt = (
     const jwtUser = req.headers.authorization || null;
     const jwt = jwtUser?.split(" ").pop();
     const isUser = verifyToken(`${jwt}`);
+
     if (!isUser) {
-      res.status(403).send({ message: "token invalido" });
+      res.status(401).send({ message: "token invalido" });
     } else {
+      req.user = isUser;
       req.user = isUser;
     }
     next();
   } catch (error) {
-    console.log(error);
     res.status(400).send({ message: "Session not valid" });
   }
 };

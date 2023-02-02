@@ -20,14 +20,18 @@ export const registerNewUser = async ({ email, password, name }: User) => {
 
 export const loginUser = async ({ email, password }: Auth) => {
   const checkIs = await userSchema.findOne({ email });
-  if (!checkIs) return "NOT_FOUND_EMAIL";
+  if (!checkIs) return { message: "EMAIL_ERROR" };
 
   const passwordHash = checkIs.password;
   const isCorrect = await verify(password, passwordHash);
 
-  if (!isCorrect) return "PASSWORD_ERROR";
+  if (!isCorrect) return { message: "PASSWORD_ERROR" };
 
-  const token = generateToken(checkIs.id);
-
-  return token;
+  const token = generateToken(checkIs.email);
+  const data = {
+    token,
+    user: checkIs,
+    message: "Ok",
+  };
+  return data;
 };

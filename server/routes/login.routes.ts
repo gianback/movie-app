@@ -8,13 +8,13 @@ import {
 const router = Router();
 
 router.post(
-  "/register",
+  "/auth/register",
   [
     check("email", "El email es obligatorio").not().isEmpty().isEmail(),
     check("password", "El password es obligatorio").not().isEmpty(),
   ],
   registerController
 );
-router.post("/login", loginController);
+router.post("/auth/login", loginController);
 
 export default router;

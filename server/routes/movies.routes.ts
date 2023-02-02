@@ -8,10 +8,11 @@ import {
 } from "../controllers/movies.controllers";
 import { check } from "express-validator";
 import { validateInputs } from "../middlewares/validateInput";
+import { checkJwt } from "../middlewares/session";
 
 const router = Router();
 
-router.get("/movies", getMovies);
+router.get("/movies", checkJwt, getMovies);
 
 router.get("/movies/:id", getMoviesById);
 

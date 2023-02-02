@@ -21,6 +21,6 @@ app.use(cors());
 
 app.use("/api", moviesRouter);
 app.use("/api", commentsRouter);
-app.use("/api", loginRouter);
+app.use("/", loginRouter);
 
 export default app;
