@@ -1,5 +1,5 @@
-import create from "zustand";
-import { Movie } from "../interfaces/Home";
+import { create } from "zustand";
+import { Movie } from "../../interfaces/Home";
 
 interface FavoriteStore {
   favoritesMovies: Movie[];

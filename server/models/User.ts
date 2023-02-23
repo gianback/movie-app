@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { User } from "../interfaces/auth.interface";
 
-const userSchema = new Schema<User>(
+const UserSchema = new Schema<User>(
   {
     email: {
       require: true,
@@ -28,4 +28,10 @@ const userSchema = new Schema<User>(
   }
 );
 
-export default mongoose.model("users", userSchema);
+UserSchema.methods.toJSON = function () {
+  const { password, _id, ...user } = this.toObject();
+  user.uid = _id;
+  return user;
+};
+
+export default mongoose.model("users", UserSchema);

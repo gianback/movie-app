@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
-import { verifyToken } from "../libs/jwt";
+import { verifyToken } from "../services/jwt";
 
 interface RequestExtend extends Request {
   user?: string | JwtPayload;

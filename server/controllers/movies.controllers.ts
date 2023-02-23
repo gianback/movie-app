@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
 import mongoose from "mongoose";
 import Movie from "../models/Movie";
-import { extractPublicIdAndSecureUrl } from "../libs/cloudinary";
+import { extractPublicIdAndSecureUrl } from "../services/cloudinary";
 
 export const getMovies = async (_req: Request, res: Response) => {
   //metodo populate es como un join, pero no es transaccional, es decir, si este documento lo estamos pidiendo pero en otro lugar lo editan o borran, igual lo trae. lo correcto es que se debe bloquear

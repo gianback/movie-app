@@ -5,8 +5,7 @@ import Container from "../globals/Container";
 import "../../styles/home/MainBanner.css";
 import { SwiperOptions } from "swiper";
 import { Movie } from "../../interfaces/Home";
-import { useFavoriteStore } from "../../stores/favoriteStore";
-import { useCurrentMovie } from "../../stores/currentMovieStore";
+import { useFavoriteStore } from "../../stores/movies/favorites.movies.store";
 import MainMovieBanner from "../molecules/MainMovieBanner";
 
 interface MainBannerProps {
@@ -49,21 +48,21 @@ const swiperOptions: SwiperOptions = {
 };
 
 const MainBanner = ({ movies }: MainBannerProps) => {
-  const { currentMovie, setCurrentMovie } = useCurrentMovie();
+  const [indexCurrentMovie, setIndexCurrentMovie] = useState<number>(0);
   const { favoritesMovies } = useFavoriteStore();
-  const handleClickMovie = (index: Movie) => {
-    setCurrentMovie(index);
+  const handleClickMovie = (index: number) => {
+    setIndexCurrentMovie(index);
   };
 
   return (
     <div className="MainBanner">
       <Container>
-        <MainMovieBanner movie={movies[0]} />
+        <MainMovieBanner movie={movies[indexCurrentMovie]} />
       </Container>
       <div className="MainBanner-movie-swiper">
         <Swiper {...swiperOptions}>
           {movies.map((item, index) => (
-            <SwiperSlide key={index} onClick={() => handleClickMovie(item)}>
+            <SwiperSlide key={index} onClick={() => handleClickMovie(index)}>
               <div>
                 <picture>
                   <img src={item.image_secondary.secure_url} alt="" />

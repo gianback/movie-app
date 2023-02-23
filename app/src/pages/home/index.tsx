@@ -2,20 +2,21 @@ import React, { useEffect } from "react";
 import { useLoaderData, useNavigate, useRoutes } from "react-router-dom";
 import MainBanner from "../../components/organisms/MainBanner";
 import { Movie } from "../../interfaces/Home";
-import { fetchMovies } from "../../utils/fetchMovies";
+import { fetchMovies } from "../../services/fetch.movies.service";
 
-interface loaderData {
+interface LoaderData {
   movies: Movie[];
 }
 
 export const HomePage = () => {
-  const { movies } = useLoaderData() as loaderData;
   const navigate = useNavigate();
-  const token: string = localStorage.getItem("token") || "";
-  if (!token) {
-    navigate("/auth/login");
-  }
-  useEffect(() => {}, []);
+  const { movies } = (useLoaderData() as LoaderData) || [];
+  useEffect(() => {
+    const token = localStorage.getItem("token") || "";
+    if (!token) {
+      navigate("/auth/login");
+    }
+  }, []);
 
   return (
     <main>
@@ -25,6 +26,11 @@ export const HomePage = () => {
 };
 
 export const loaderHomeMovies = async () => {
+  const token: string = localStorage.getItem("token") || "";
+  if (!token) {
+    return { movies: [] };
+  }
+
   const movies = await fetchMovies();
   return { movies };
 };

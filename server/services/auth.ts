@@ -1,6 +1,6 @@
 import { Auth, User } from "../interfaces/auth.interface";
 import userSchema from "../models/User";
-import { encryp, verify } from "../libs/bycript";
+import { encryp, verify } from "./bycript";
 import { generateToken } from "./jwt";
 
 export const registerNewUser = async ({ email, password, name }: User) => {

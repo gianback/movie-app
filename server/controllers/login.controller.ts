@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { loginUser, registerNewUser } from "../libs/auth";
+import { loginUser, registerNewUser } from "../services/auth";
 
 export const registerController = async (req: Request, res: Response) => {
   const newUser = req.body;
@@ -9,7 +9,7 @@ export const registerController = async (req: Request, res: Response) => {
 };
 
 export const loginController = async (req: Request, res: Response) => {
-  const { user } = req.body;
-  const userLogin = await loginUser(user);
+  const { login } = req.body;
+  const userLogin = await loginUser(login);
   res.send(userLogin);
 };

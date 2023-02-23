@@ -5,7 +5,7 @@ import { HomePage, loaderHomeMovies } from "../pages/home";
 import LayoutApp from "../components/layout/LayoutApp";
 import { Favorites } from "../pages/favorites";
 import { Error404 } from "../pages/error";
-import { Login } from "../pages/login";
+import { LoginForm } from "../pages/loginForm";
 import { Register } from "../pages/register";
 
 const router = createBrowserRouter([
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth/login",
-    element: <Login />,
+    element: <LoginForm />,
   },
   {
     path: "/auth/register",

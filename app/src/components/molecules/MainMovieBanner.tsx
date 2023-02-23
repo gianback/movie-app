@@ -1,44 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Movie } from "../../interfaces/Home";
-import { useCurrentMovie } from "../../stores/currentMovieStore";
-import { useFavoriteStore } from "../../stores/favoriteStore";
 import "../../styles/home/MainBanner.css";
 
 interface MainMovieBannerProps {
   movie: Movie;
 }
 const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
-  const { currentMovie, setCurrentMovie } = useCurrentMovie();
-  useEffect(() => {
-    if (!currentMovie) {
-      setCurrentMovie(movie);
-    }
-  }, []);
   return (
     <>
-      {currentMovie && (
+      {movie && (
         <div className="MainBanner-movie">
           <div
             className={`MainBanner-movie-pictures ${
-              currentMovie._id ? "active" : "noActive"
+              movie._id ? "active" : "noActive"
             }`}
           >
             <picture>
               <img
-                src={currentMovie.image_primary.secure_url}
-                alt={`${currentMovie.title} Image`}
+                src={movie.image_primary.secure_url}
+                alt={`${movie.title} Image`}
               />
             </picture>
             <picture>
               <img
-                src={currentMovie.image_secondary.secure_url}
-                alt={`${currentMovie.title} Image`}
+                src={movie.image_secondary.secure_url}
+                alt={`${movie.title} Image`}
               />
             </picture>
           </div>
           <div className="MainBanner-movie-info">
-            <h1>{currentMovie.title}</h1>
-            <p>{currentMovie.description}</p>
+            <h1>{movie.title}</h1>
+            <p>{movie.description}</p>
             <div>
               <button className="MainBanner-movie-btn">
                 Agregar a mis favoritos
