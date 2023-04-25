@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import create from "zustand";
 import { Movie } from "../../interfaces/Home";
 
 interface FavoriteStore {

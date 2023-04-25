@@ -1,10 +1,32 @@
 import React from "react";
-import { useLoginForm } from "../../hooks/useLoginForm";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
 
-export const LoginForm = () => {
-  const { login, errors, showErrors, handleInputChange, handleLogin } =
-    useLoginForm();
+import { useLoginForm } from "../../../hooks/useLoginForm";
+import { userStore } from "../../../stores/user/user.store";
+import axios from "axios";
+export const Login = () => {
+  const { login, errors, handleInputChange, handleLogin } = useLoginForm();
+  const navigate = useNavigate();
+  const setUser = userStore((state) => state.setUser);
   const { email, password } = login;
+
+  const handleAuthGoogle = async (credentials) => {
+    try {
+      const { data } = await axios.post("http://localhost:3000/auth/google", {
+        data: {
+          id: credentials.clientId,
+          googleToken: credentials.credential,
+        },
+      });
+      const { token, ...user } = data;
+      localStorage.setItem("token", token);
+      setUser(user);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <form
@@ -25,7 +47,9 @@ export const LoginForm = () => {
               className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md text-[1.7rem]"
               placeholder="example@example.com"
             />
-            {errors.email && <p>{errors.email}</p>}
+            {errors.email && (
+              <p className="text-red-500 text-2xl mt-2">{errors.email}</p>
+            )}
             <label className="block font-semibold text-[1.9rem]">
               Password
             </label>
@@ -37,17 +61,28 @@ export const LoginForm = () => {
               className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md text-[1.7rem]"
               placeholder="password"
             />
-            {errors.password && <p>{errors.password}</p>}
+            {errors.password && (
+              <p className="text-red-500 text-2xl mt-2">{errors.password}</p>
+            )}
             <div className="flex justify-between items-baseline">
               <button className="mt-4 bg-purple-500 text-white py-2 px-6 rounded-md hover:bg-purple-600 text-[2rem]">
                 Ingresar
               </button>
-              <a href="#" className="text-sm hover:underline md:text-[1.7rem]">
+              <Link
+                to={"/auth/register"}
+                className="text-sm hover:underline md:text-[1.7rem]"
+              >
                 Forgot password?
-              </a>
+              </Link>
             </div>
           </div>
         </div>
+        <GoogleLogin
+          onSuccess={handleAuthGoogle}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
       </div>
     </form>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLoaderData, useNavigate, useRoutes } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import MainBanner from "../../components/organisms/MainBanner";
 import { Movie } from "../../interfaces/Home";
 import { fetchMovies } from "../../services/fetch.movies.service";

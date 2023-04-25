@@ -4,6 +4,7 @@ import moviesRouter from "./routes/movies.routes";
 import cors from "cors";
 import commentsRouter from "./routes/comments.routes";
 import loginRouter from "./routes/login.routes";
+import verifyToken from "./routes/verify.token.routes";
 
 const app = express();
 
@@ -11,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(
   fileUpload({
-    //cuando se sube una image no la mantenga en memoria sino que la meta dentro de una carpeta
+    //cuando se sube una image no la mantenga en memoria sino que la meta dentro de una carpeta.
     useTempFiles: true,
     tempFileDir: "./upload",
   })
@@ -22,5 +23,6 @@ app.use(cors());
 app.use("/api", moviesRouter);
 app.use("/api", commentsRouter);
 app.use("/", loginRouter);
+app.use("/", verifyToken);
 
 export default app;

@@ -4,6 +4,7 @@ import {
   loginController,
   registerController,
 } from "../controllers/login.controller";
+import { googleController } from "../controllers/google.controller";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.post(
   registerController
 );
 router.post("/auth/login", loginController);
+router.post("/auth/google", googleController);
 
 export default router;

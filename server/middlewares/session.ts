@@ -20,7 +20,6 @@ export const checkJwt = (
       res.status(401).send({ message: "token invalido" });
     } else {
       req.user = isUser;
-      req.user = isUser;
     }
     next();
   } catch (error) {

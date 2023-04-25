@@ -1,9 +1,16 @@
-import { Link, Router, Routes } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../../styles/layout/Header.css";
 import Container from "../globals/Container";
 const Header = () => {
+  const { pathname } = useLocation();
   return (
-    <header className="Header">
+    <header
+      className={`Header ${
+        pathname === "/auth/login" || pathname === "/auth/register"
+          ? "hidden"
+          : ""
+      }`}
+    >
       <Container>
         <nav className="Header-nav">
           <span>Logo</span>

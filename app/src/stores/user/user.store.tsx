@@ -1,12 +1,24 @@
-import { create } from "zustand";
+import create from "zustand";
 
-// interface userStoreInterface{
-//     user:
-// }
+interface IUser {
+  names: string;
+  lastName: string;
+  email: string;
+  img: string;
+}
 
-// export const userStore = create<userStoreInterface>((set)=>{
-//     user: {},
-//     setUser(user) =>{
+const initial_user: IUser = {
+  names: "",
+  email: "",
+  lastName: "",
+  img: "",
+};
+interface userStoreInterface {
+  user: IUser;
+  setUser: (user: IUser) => void;
+}
 
-//     }
-// })
+export const userStore = create<userStoreInterface>((set) => ({
+  user: initial_user,
+  setUser: (user) => set((_state) => ({ user })),
+}));

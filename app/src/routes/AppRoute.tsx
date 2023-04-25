@@ -1,12 +1,15 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import { HomePage, loaderHomeMovies } from "../pages/home";
 import LayoutApp from "../components/layout/LayoutApp";
-import { Favorites } from "../pages/favorites";
-import { Error404 } from "../pages/error";
-import { LoginForm } from "../pages/loginForm";
-import { Register } from "../pages/register";
+import {
+  Error404,
+  Favorites,
+  Login,
+  Register,
+  HomePage,
+  loaderHomeMovies,
+} from "../pages";
 
 const router = createBrowserRouter([
   {
@@ -24,15 +27,15 @@ const router = createBrowserRouter([
         element: <Favorites />,
         errorElement: <Error404 />,
       },
+      {
+        path: "/auth/login",
+        element: <Login />,
+      },
+      {
+        path: "/auth/register",
+        element: <Register />,
+      },
     ],
-  },
-  {
-    path: "/auth/login",
-    element: <LoginForm />,
-  },
-  {
-    path: "/auth/register",
-    element: <Register />,
   },
 ]);
 export default router;

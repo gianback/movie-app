@@ -5,9 +5,8 @@ import Container from "../globals/Container";
 import "../../styles/home/MainBanner.css";
 import { SwiperOptions } from "swiper";
 import { Movie } from "../../interfaces/Home";
-import { useFavoriteStore } from "../../stores/movies/favorites.movies.store";
 import MainMovieBanner from "../molecules/MainMovieBanner";
-
+import { useFavoriteStore } from "../../stores/movies/favorites.movies.store";
 interface MainBannerProps {
   movies: Movie[];
 }

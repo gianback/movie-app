@@ -6,8 +6,12 @@ import "./index.css";
 import "swiper/css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/AppRoute";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_APP_GOOGLE_PUBLIC_KEY}>
+      <RouterProvider router={router}></RouterProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
