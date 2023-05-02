@@ -1,10 +1,10 @@
 import axios from "axios";
-import  { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface InitialLoginState{
-  email:string
-  password:string
+interface InitialLoginState {
+  email: string;
+  password: string;
 }
 
 export const useLoginForm = () => {
@@ -39,7 +39,7 @@ export const useLoginForm = () => {
   };
   const handleLogin = async (e) => {
     e.preventDefault();
-    
+
     if (Object.keys(login).every((item) => login[item] === "")) {
       setTimeout(() => {
         showErrors();

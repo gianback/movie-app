@@ -9,6 +9,17 @@ export const generateToken = (id: string) => {
 };
 
 export const verifyToken = (jwt: string) => {
-  const isOk = verify(jwt, JWT_SECRET);
-  return isOk;
+  try {
+    const isTokenOk = verify(jwt, JWT_SECRET);
+    return {
+      mssg: "token is valid",
+      status: 200,
+      token: isTokenOk,
+    };
+  } catch (error) {
+    return {
+      mssg: "token is invalid",
+      status: 406,
+    };
+  }
 };

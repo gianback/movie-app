@@ -19,18 +19,13 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <main>
+    <>
       <MainBanner movies={movies} />
-    </main>
+    </>
   );
 };
 
 export const loaderHomeMovies = async () => {
-  const token: string = localStorage.getItem("token") || "";
-  if (!token) {
-    return { movies: [] };
-  }
-
   const movies = await fetchMovies();
   return { movies };
 };
