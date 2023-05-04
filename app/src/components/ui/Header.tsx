@@ -1,16 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../styles/layout/Header.css";
 import Container from "../globals/Container";
+import { userStore } from "../../stores/user/user.store";
 const Header = () => {
-  const { pathname } = useLocation();
+  const { picture, email, lastName, names } = userStore((state) => state.user);
+
   return (
-    <header
-      className={`Header ${
-        pathname === "/auth/login" || pathname === "/auth/register"
-          ? "hidden"
-          : ""
-      }`}
-    >
+    <header className={`Header`}>
       <Container>
         <nav className="Header-nav">
           <span>Logo</span>
@@ -18,7 +14,13 @@ const Header = () => {
             <Link to="/">Home</Link>
             <Link to="/estrenos">Estrenos</Link>
           </ul>
-          <span>Avatar</span>
+          <div className="flex">
+            <figure className="w-16 h-16 rounded-full overflow-hidden">
+              <img src={picture} alt={names} />
+            </figure>
+            <span>{names}</span>
+            <span>{lastName}</span>
+          </div>
         </nav>
       </Container>
     </header>

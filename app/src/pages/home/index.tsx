@@ -11,12 +11,12 @@ interface LoaderData {
 export const HomePage = () => {
   const navigate = useNavigate();
   const { movies } = (useLoaderData() as LoaderData) || [];
-  useEffect(() => {
-    const token = localStorage.getItem("token") || "";
-    if (!token) {
-      navigate("/auth/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token") || "";
+  //   if (!token) {
+  //     navigate("/auth/login");
+  //   }
+  // }, []);
 
   return (
     <>

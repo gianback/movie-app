@@ -11,14 +11,11 @@ import {
   HomePage,
   loaderHomeMovies,
 } from "../pages";
-import { authLoader } from "../loaders/authLoader";
-import { mainLoader } from "../loaders/mainLoader";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LayoutApp />,
-    loader: mainLoader,
     children: [
       {
         index: true,
@@ -35,7 +32,6 @@ const router = createBrowserRouter([
   },
   {
     element: <AuthLayout />,
-    loader: authLoader,
     children: [
       {
         path: "/auth/login",

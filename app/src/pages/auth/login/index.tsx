@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 
 import { useLoginForm } from "../../../hooks/useLoginForm";
@@ -19,9 +19,16 @@ export const Login = () => {
           googleToken: credentials.credential,
         },
       });
-      const { token, ...user } = data;
-      localStorage.setItem("token", token);
+      const { token, ...resTuser } = data;
+
+      const { last_names, ...userData } = structuredClone(resTuser);
+      const user = {
+        ...userData,
+        lastName: last_names,
+      };
       setUser(user);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
     } catch (error) {
       console.log(error);
