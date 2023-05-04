@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Container from "../globals/Container";
 import "../../styles/home/MainBanner.css";
-import { SwiperOptions } from "swiper";
+import { Autoplay, SwiperOptions } from "swiper";
 import { Movie } from "../../interfaces/Home";
 import MainMovieBanner from "../molecules/MainMovieBanner";
 import { useFavoriteStore } from "../../stores/movies/favorites.movies.store";
@@ -14,10 +14,10 @@ interface MainBannerProps {
 const swiperOptions: SwiperOptions = {
   slidesPerView: "auto",
   spaceBetween: 35,
-  speed: 1200,
+  speed: 1500,
   loop: true,
   autoplay: {
-    delay: 7000,
+    delay: 3000,
     disableOnInteraction: false,
   },
   navigation: {
@@ -44,11 +44,11 @@ const swiperOptions: SwiperOptions = {
       spaceBetween: 61,
     },
   },
+  modules: [Autoplay],
 };
 
 const MainBanner = ({ movies }: MainBannerProps) => {
   const [indexCurrentMovie, setIndexCurrentMovie] = useState<number>(0);
-  const { favoritesMovies } = useFavoriteStore();
   const handleClickMovie = (index: number) => {
     setIndexCurrentMovie(index);
   };
@@ -56,18 +56,22 @@ const MainBanner = ({ movies }: MainBannerProps) => {
   return (
     <div className="MainBanner">
       <Container>
+        <h1 className="text-[3rem] text-white font-bold mb-24 max-w-[50ch] text-center mx-auto">
+          ¡Movie App, donde puedes ver las reviews de películas y series de
+          nuestros usuarios SIN SPOILERS!
+        </h1>
         <MainMovieBanner movie={movies[indexCurrentMovie]} />
       </Container>
       <div className="MainBanner-movie-swiper">
         <Swiper {...swiperOptions}>
-          {movies.map((item, index) => (
+          {movies.map(({ title, image_secondary }, index) => (
             <SwiperSlide key={index} onClick={() => handleClickMovie(index)}>
               <div>
                 <picture>
-                  <img src={item.image_secondary.secure_url} alt="" />
+                  <img src={image_secondary.secure_url} alt={title} />
                   <span>⭐</span>
                 </picture>
-                <h2>{item.title}</h2>
+                <h2>{title}</h2>
               </div>
             </SwiperSlide>
           ))}
