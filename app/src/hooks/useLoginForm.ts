@@ -1,6 +1,8 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { userStore } from "../stores/user/user.store";
+import { showErrors } from "../utilities/utils";
 
 interface InitialLoginState {
   email: string;
@@ -9,46 +11,29 @@ interface InitialLoginState {
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
+  const setUser = userStore((state) => state.setUser);
 
   const [errors, setErrors] = useState<InitialLoginState>({
     email: "",
     password: "",
   });
-  const [login, setLogin] = useState<InitialLoginState>({
-    email: "",
-    password: "",
-  });
-  //estado global
-  const [user, setUser] = useState(null);
 
-  const showErrors = () => {
-    for (const key in errors) {
-      setErrors((prevState) => {
-        return {
-          ...prevState,
-          [key]: "This field is required",
-        };
-      });
-    }
-  };
-  const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-    setLogin({
-      ...login,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-  };
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const login = Object.fromEntries(formData);
 
     if (Object.keys(login).every((item) => login[item] === "")) {
       setTimeout(() => {
-        showErrors();
-      }, 5000);
+        showErrors(errors, setErrors);
+      }, 4000);
       return;
     }
+
     try {
       const { data } = await axios.post("http://localhost:3000/auth/login", {
-        login,
+        formData,
       });
       const { message, token, user } = data;
       if (message === "Ok") {
@@ -62,11 +47,8 @@ export const useLoginForm = () => {
   };
 
   return {
-    login,
-    setLogin,
     errors,
     showErrors,
-    handleInputChange,
     handleLogin,
   };
 };

@@ -1,15 +1,14 @@
 import React from "react";
-import { Link, json, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 
 import { useLoginForm } from "../../../hooks/useLoginForm";
 import { userStore } from "../../../stores/user/user.store";
 import axios from "axios";
 export const Login = () => {
-  const { login, errors, handleInputChange, handleLogin } = useLoginForm();
+  const { errors, handleLogin } = useLoginForm();
   const navigate = useNavigate();
   const setUser = userStore((state) => state.setUser);
-  const { email, password } = login;
 
   const handleAuthGoogle = async (credentials) => {
     try {
@@ -49,8 +48,6 @@ export const Login = () => {
             <input
               type="email"
               name="email"
-              value={email}
-              onChange={handleInputChange}
               className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md text-[1.7rem]"
               placeholder="example@example.com"
             />
@@ -63,8 +60,6 @@ export const Login = () => {
             <input
               type="password"
               name="password"
-              value={password}
-              onChange={handleInputChange}
               className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md text-[1.7rem]"
               placeholder="password"
             />
@@ -79,7 +74,7 @@ export const Login = () => {
                 to={"/auth/register"}
                 className="text-sm hover:underline md:text-[1.7rem]"
               >
-                Forgot password?
+                You don't have an account?
               </Link>
             </div>
           </div>

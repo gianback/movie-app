@@ -3,9 +3,9 @@ import { loginUser, registerNewUser } from "../services/auth";
 
 export const registerController = async (req: Request, res: Response) => {
   const newUser = req.body;
-  const responseUser = await registerNewUser(newUser);
+  const userCreated = await registerNewUser(newUser);
 
-  res.send(responseUser);
+  res.send(userCreated);
 };
 
 export const loginController = async (req: Request, res: Response) => {

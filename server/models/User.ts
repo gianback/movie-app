@@ -17,6 +17,10 @@ const UserSchema = new Schema<User>(
       require: true,
       type: String,
     },
+    last_names: {
+      require: true,
+      type: String,
+    },
     description: {
       type: String,
       default: "description",
