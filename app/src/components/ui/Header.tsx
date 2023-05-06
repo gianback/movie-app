@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import Container from "../globals/Container";
 import { userStore } from "../../stores/user/user.store";
-import defaultImg from "../../../public/default_img.png";
-import logo from "../../../public/logo.png";
+import defaultImg from "../../public/default_img.png";
+import logo from "../../public/logo.png";
 const Header = () => {
   const { lastName, names } = userStore((state) => state.user);
 
