@@ -24,7 +24,8 @@ export const checkJwt = (
   }
 
   verify(token, JWT_SECRET, (error, user) => {
-    if (error) return res.status(401).send({ message: "token invalido" });
+    if (error)
+      return res.status(401).send({ message: "token invalido", status: 401 });
     req.user = user;
     next();
     return;

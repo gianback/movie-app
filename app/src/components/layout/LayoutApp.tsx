@@ -10,8 +10,14 @@ const LayoutApp: FC<PropsWithChildren> = () => {
 
   const location = useLocation();
   const verifyAppLayout = async () => {
-    const { status } = await verifyToken();
-    status === 200 ? setIsAuth(true) : setIsAuth(false);
+    try {
+      const { data } = await verifyToken();
+      if (data.status === 200 && !isAuth) {
+        setIsAuth(true);
+      }
+    } catch (error) {
+      setIsAuth(false);
+    }
   };
 
   useEffect(() => {

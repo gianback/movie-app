@@ -3,6 +3,7 @@ import Container from "../globals/Container";
 import defaultImg from "../../public/default_img.png";
 import logo from "../../public/logo.png";
 import { useAuthStore } from "../../stores/auth/authStore";
+import "../../styles/ui/Header.css";
 export const Header = () => {
   const { last_names, names } = useAuthStore((state) => state.profile);
 
@@ -27,10 +28,26 @@ export const Header = () => {
             </ul>
           </div>
 
-          <div className="flex gap-4">
-            <figure className="w-16 h-16 rounded-full overflow-hidden">
-              <img src={defaultImg} alt={names} />
-            </figure>
+          <div className="flex gap-4 relative">
+            <div className="Header-options">
+              <figure className="w-16 h-16 rounded-full overflow-hidden">
+                <img src={defaultImg} alt={names} />
+              </figure>
+              <div className="Header-options-menu">
+                <ul>
+                  <li>Mis Peliculas Favoritas</li>
+                  <li>
+                    <button>Log out</button>
+                  </li>
+                  <li>
+                    <button>Log out</button>
+                  </li>
+                  <li>
+                    <button>Log out</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div className="flex flex-col text-2xl font-medium tracking-wider">
               <span>{names}</span>
               <span>{last_names}</span>
