@@ -21,6 +21,7 @@ type State = {
 type Actions = {
   setToken: (token: string) => void;
   setProfile: (profile: any) => void;
+  setIsAuth: (isAuth: boolean) => void;
   // register: (user: any) => void;
   // logout: () => void;
   // cleanErrors: () => void;
@@ -35,6 +36,7 @@ export const useAuthStore = create(
       errors: null,
       setToken: (token: string) => set((state) => ({ token })),
       setProfile: (profile: any) => set((state) => ({ profile })),
+      setIsAuth: (isAuth: any) => set((state) => ({ isAuth })),
     }),
     {
       name: "auth",

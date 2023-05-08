@@ -1,23 +1,17 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-
 import { FC, PropsWithChildren, useEffect } from "react";
-import { verifyToken } from "../../services/verify.token.service";
-import { userStore } from "../../stores/user/user.store";
 import { Header, Footer } from "../ui";
+import { useAuthStore } from "../../stores/auth/authStore";
+import { verifyToken } from "../../services/verify.token.service";
 
 const LayoutApp: FC<PropsWithChildren> = () => {
-  const setIsUserAuth = userStore((state) => state.setIsUserAuth);
-  const isUserAuth = userStore((state) => state.isUserAuth);
-  const setUser = userStore((state) => state.setUser);
+  const isAuth = useAuthStore((state) => state.isAuth);
+  const setIsAuth = useAuthStore((state) => state.setIsAuth);
+
   const location = useLocation();
   const verifyAppLayout = async () => {
     const { status } = await verifyToken();
-    if (status !== 200) {
-      setIsUserAuth(false);
-    } else {
-      const user = JSON.parse(localStorage.getItem("user") as string);
-      setUser(user);
-    }
+    status === 200 ? setIsAuth(true) : setIsAuth(false);
   };
 
   useEffect(() => {
@@ -26,7 +20,7 @@ const LayoutApp: FC<PropsWithChildren> = () => {
 
   return (
     <>
-      {isUserAuth ? (
+      {isAuth ? (
         <>
           <Header />
           <Outlet />
