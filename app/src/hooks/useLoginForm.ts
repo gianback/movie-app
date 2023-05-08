@@ -3,6 +3,8 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/user/user.store";
 import { showErrors } from "../utilities/utils";
+import { useAuthStore } from "../stores/auth/authStore";
+import { profileRequest } from "../services/profile.service";
 
 interface InitialLoginState {
   email: string;
@@ -22,25 +24,32 @@ export const useLoginForm = () => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const login = Object.fromEntries(formData);
+    const setToken = useAuthStore.getState().setToken;
+    const setProfile = useAuthStore.getState().setProfile;
+    const userData = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
 
-    if (Object.keys(login).every((item) => login[item] === "")) {
+    if (Object.keys(userData).every((item) => userData[item] === "")) {
       setTimeout(() => {
         showErrors(errors, setErrors);
       }, 4000);
       return;
     }
-
     try {
-      const { data } = await axios.post("http://localhost:3000/auth/login", {
-        formData,
-      });
-      const { message, token, user } = data;
-      if (message === "Ok") {
-        localStorage.setItem("token", token);
-        setUser(user);
-        navigate("/");
-      }
+      const { data: user } = await axios.post(
+        "http://localhost:3000/auth/login",
+        {
+          user: userData,
+        }
+      );
+      setToken(user.token);
+
+      const { data } = await profileRequest();
+
+      setProfile(data.user);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

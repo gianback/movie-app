@@ -1,12 +1,9 @@
-import { Request, Response, Router } from "express";
-import { verifyToken } from "../services/jwt";
+import { Router } from "express";
+import { checkJwt } from "../middlewares/session";
+import { verifyTokenController } from "../controllers/verify.token.controller";
 
 const router = Router();
 
-router.post("/verify-token", async (req: Request, res: Response) => {
-  const { token } = req.body;
-  const { status, mssg } = verifyToken(token);
-  res.json({ status, mssg });
-});
+router.post("/verify-token", checkJwt, verifyTokenController);
 
 export default router;

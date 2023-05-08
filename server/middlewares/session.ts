@@ -1,28 +1,33 @@
-import { NextFunction, Request, Response } from "express";
-import { JwtPayload } from "jsonwebtoken";
-import { verifyToken } from "../services/jwt";
-
-interface RequestExtend extends Request {
-  user?: string | JwtPayload;
-}
+import { NextFunction, Response } from "express";
+import { verify } from "jsonwebtoken";
+import { JWT_SECRET } from "../utilities/constants";
+import { RequestExt } from "../types/express";
 
 export const checkJwt = (
-  req: RequestExtend,
+  req: RequestExt,
   res: Response,
   next: NextFunction
 ) => {
-  try {
-    const jwtUser = req.headers.authorization || null;
-    const jwt = jwtUser?.split(" ").pop();
-    const isUser = verifyToken(`${jwt}`);
+  const authHeader = req.headers.authorization;
 
-    if (!isUser) {
-      res.status(401).send({ message: "token invalido" });
-    } else {
-      req.user = isUser;
-    }
-    next();
-  } catch (error) {
-    res.status(400).send({ message: "Session not valid" });
+  if (!authHeader) {
+    return res.status(401).json({
+      message: "Unauthorized headers",
+    });
   }
+  const token = authHeader?.split(" ")[1] as string;
+
+  if (!token) {
+    return res.status(401).json({
+      message: "Unauthorized token malo",
+    });
+  }
+
+  verify(token, JWT_SECRET, (error, user) => {
+    if (error) return res.status(401).send({ message: "token invalido" });
+    req.user = user;
+    next();
+    return;
+  });
+  return;
 };

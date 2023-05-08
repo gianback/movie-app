@@ -3,7 +3,7 @@ import fileUpload from "express-fileupload";
 import moviesRouter from "./routes/movies.routes";
 import cors from "cors";
 import commentsRouter from "./routes/comments.routes";
-import loginRouter from "./routes/login.routes";
+import loginRouter from "./routes/auth.routes";
 import verifyToken from "./routes/verify.token.routes";
 
 const app = express();
@@ -18,7 +18,12 @@ app.use(
   })
 );
 //cors
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use("/api", moviesRouter);
 app.use("/api", commentsRouter);

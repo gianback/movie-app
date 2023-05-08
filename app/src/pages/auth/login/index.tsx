@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 
 import { useLoginForm } from "../../../hooks/useLoginForm";
-import { userStore } from "../../../stores/user/user.store";
 import axios from "axios";
+import { useAuthStore } from "../../../stores/auth/authStore";
 export const Login = () => {
   const { errors, handleLogin } = useLoginForm();
   const navigate = useNavigate();
-  const setUser = userStore((state) => state.setUser);
+  const setProfile = useAuthStore((state) => state.setProfile);
+  const setToken = useAuthStore((state) => state.setToken);
 
   const handleAuthGoogle = async (credentials) => {
     try {
@@ -18,16 +19,9 @@ export const Login = () => {
           googleToken: credentials.credential,
         },
       });
-      const { token, ...resTuser } = data;
-
-      const { last_names, ...userData } = structuredClone(resTuser);
-      const user = {
-        ...userData,
-        lastName: last_names,
-      };
-      setUser(user);
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      const { token, ...user } = data;
+      setProfile(user);
+      setToken(token);
       navigate("/");
     } catch (error) {
       console.log(error);

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Container from "../globals/Container";
-import { userStore } from "../../stores/user/user.store";
 import defaultImg from "../../public/default_img.png";
 import logo from "../../public/logo.png";
-const Header = () => {
-  const { lastName, names } = userStore((state) => state.user);
+import { useAuthStore } from "../../stores/auth/authStore";
+export const Header = () => {
+  const { last_names, names } = useAuthStore((state) => state.profile);
 
   return (
     <header className={`bg-secondary text-white  sticky top-0`}>
@@ -33,7 +33,7 @@ const Header = () => {
             </figure>
             <div className="flex flex-col text-2xl font-medium tracking-wider">
               <span>{names}</span>
-              <span>{lastName}</span>
+              <span>{last_names}</span>
             </div>
           </div>
         </nav>
@@ -41,5 +41,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

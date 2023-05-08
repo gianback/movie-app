@@ -3,7 +3,7 @@ export interface Auth {
   password: string;
 }
 export interface User extends Auth {
-  name: string;
+  names: string;
   description: string;
   last_names: string;
 }

@@ -1,7 +1,6 @@
 import { Response, Request } from "express";
 import Comment from "../models/Comment";
 import Movie from "../models/Movie";
-// import { MovieInterface } from "../types";
 
 export const getComments = async (_req: Request, res: Response) => {
   const comments = await Comment.find();

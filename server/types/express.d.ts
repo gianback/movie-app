@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface CommentContrat {
   description: string;
   commend: boolean;
@@ -10,4 +12,8 @@ export interface MovieInterface {
   image_primary?: string;
   image_secondary?: string;
   comments?: Array<string>;
+}
+
+export interface RequestExt extends Request {
+  user?: any;
 }

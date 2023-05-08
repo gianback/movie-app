@@ -3,12 +3,7 @@ import userSchema from "../models/User";
 import { encryp, verify } from "./bycript";
 import { generateToken } from "./jwt";
 
-export const registerNewUser = async ({
-  email,
-  password,
-  name,
-  last_names,
-}: User) => {
+export const registerNewUser = async ({ email, password, ...user }: User) => {
   const checkUser = await userSchema.findOne({ email });
   if (checkUser) {
     return "ALREADY USER";
@@ -17,8 +12,7 @@ export const registerNewUser = async ({
   const createUser = await userSchema.create({
     email,
     password: passHash,
-    name,
-    last_names,
+    ...user,
   });
 
   return createUser;
@@ -36,8 +30,6 @@ export const loginUser = async ({ email, password }: Auth) => {
   const token = generateToken(checkIs.email);
   const data = {
     token,
-    user: checkIs,
-    message: "Ok",
   };
   return data;
 };

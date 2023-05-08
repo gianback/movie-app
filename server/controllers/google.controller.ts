@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { decode } from "jsonwebtoken";
 import { generateToken } from "../services/jwt";
 
-export interface IUser {
+export interface GoogleUser {
   iss: string;
   nbf: number;
   aud: string;
@@ -24,7 +24,7 @@ export const googleController = (req: Request, res: Response) => {
   const token = generateToken(id);
   const { given_name, family_name, email, picture } = decode(
     googleToken
-  ) as IUser;
+  ) as GoogleUser;
   res.status(200).json({
     names: given_name,
     last_names: family_name,

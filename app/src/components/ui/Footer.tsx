@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../globals/Container";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <div className="bg-secondary py-8">
       <Container>
@@ -12,5 +12,3 @@ const Footer = () => {
     </div>
   );
 };
-
-export default Footer;
