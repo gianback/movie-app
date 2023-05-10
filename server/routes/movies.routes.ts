@@ -1,20 +1,15 @@
 import { Router } from "express";
 import {
-  deleteMovie,
   getMovies,
   getMoviesById,
   createMovie,
-  updateMovie,
+  addFavoriteMovie,
 } from "../controllers/movies.controllers";
 import { check } from "express-validator";
 import { validateInputs } from "../middlewares/validateInput";
 import { checkJwt } from "../middlewares/session";
 
 const router = Router();
-
-router.get("/movies", checkJwt, getMovies);
-
-router.get("/movies/:id", getMoviesById);
 
 router.post(
   "/movies",
@@ -27,8 +22,10 @@ router.post(
   createMovie
 );
 
-router.put("/movies/:id", updateMovie);
+router.get("/movies", checkJwt, getMovies);
 
-router.delete("/movies", deleteMovie);
+router.get("/movies/:id", getMoviesById);
+
+router.post("/favorite-movies", addFavoriteMovie);
 
 export default router;

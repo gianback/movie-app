@@ -23,6 +23,7 @@ const router = createBrowserRouter([
         loader: loaderHomeMovies,
         errorElement: <Error404 />,
       },
+
       {
         path: "/favorites",
         element: <Favorites />,

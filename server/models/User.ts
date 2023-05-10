@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { User } from "../interfaces/auth.interface";
+import { User } from "../interfaces/user.interface";
 
 const UserSchema = new Schema<User>(
   {
@@ -21,10 +21,12 @@ const UserSchema = new Schema<User>(
       require: true,
       type: String,
     },
-    description: {
-      type: String,
-      default: "description",
-    },
+    favorite_movies: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "movie",
+      },
+    ],
   },
   {
     versionKey: false,

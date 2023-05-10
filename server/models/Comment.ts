@@ -1,15 +1,16 @@
 import mongoose, { Schema } from "mongoose";
+import { Comment } from "../interfaces/movie.interface";
 
-const commentSchema = new mongoose.Schema({
-  content: {
+const commentSchema = new mongoose.Schema<Comment>({
+  comment: {
     type: String,
     required: true,
   },
   date: {
     type: Date,
   },
-  commend: {
-    type: Boolean,
+  qualification: {
+    type: Number,
     required: true,
   },
   movieId: {

@@ -8,26 +8,26 @@ export const getComments = async (_req: Request, res: Response) => {
 };
 
 export const createComment = async (req: Request, res: Response) => {
-  const { content, commend, movieId } = req.body;
+  const { comment, qualification, movieId } = req.body;
 
   const movie = await Movie.findById(movieId);
 
+  if (!movie)
+    return res.status(404).json({ status: 404, message: "Movie not found" });
+
   const newComment = await new Comment({
-    content,
-    commend,
+    comment,
+    qualification,
     date: new Date(),
     movieId: movie?._id,
   });
 
   try {
     const savedComment = await newComment.save();
-
-    if (movie) {
-      movie.comments = movie.comments.concat(savedComment.id);
-      await movie.save();
-      res.json(savedComment);
-    }
+    movie.comments = movie.comments.concat(savedComment.id);
+    await movie.save();
+    return res.json(savedComment);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ error });
   }
 };

@@ -3,19 +3,20 @@ import { UploadedFile } from "express-fileupload";
 import mongoose from "mongoose";
 import Movie from "../models/Movie";
 import { extractPublicIdAndSecureUrl } from "../services/cloudinary";
+import User from "../models/User";
 
 export const getMovies = async (_req: Request, res: Response) => {
   //metodo populate es como un join, pero no es transaccional, es decir, si este documento lo estamos pidiendo pero en otro lugar lo editan o borran, igual lo trae. lo correcto es que se debe bloquear
   //1er parametro referencia en plural y el segundo parametro pasamos con 1 a los que si queremos y en 0 a los que no, por defecto trae todos las propiedades.
   const movies = await Movie.find().populate("comments", {
-    content: 1,
-    commend: 1,
+    comment: 1,
+    qualification: 1,
+    date: 1,
     _id: 0,
   });
   res.send(movies);
 };
 
-//Post
 export const createMovie = async (req: Request, res: Response) => {
   const { title, description } = req.body;
 
@@ -23,6 +24,7 @@ export const createMovie = async (req: Request, res: Response) => {
     title,
     description,
   });
+
   if (req.files) {
     const img_primary = req.files?.image_primary as UploadedFile;
     const resultImgPrimary = await extractPublicIdAndSecureUrl(
@@ -71,4 +73,33 @@ export const deleteMovie = async (req: Request, res: Response) => {
   return res.json({
     msg: "Movie deleted",
   });
+};
+
+//Favorite movies
+
+export const addFavoriteMovie = async (req: Request, res: Response) => {
+  const { userId, movieId } = req.body;
+  const user = await User.findById(userId);
+
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  const movieIdList = user.favorite_movies.map((movie) => movie.toString());
+
+  if (movieIdList?.includes(movieId)) {
+    await User.findByIdAndUpdate(
+      userId,
+      { $pull: { favorite_movies: movieId } },
+      { new: true }
+    );
+    return res.status(200).json({
+      message: "Favorite Movie List updated successfully",
+    });
+  } else {
+    user.favorite_movies.push(movieId);
+    await user.save();
+
+    return res.status(200).json({
+      message: "Película agregada a la lista de favoritos correctamente",
+    });
+  }
 };
