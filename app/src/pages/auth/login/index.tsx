@@ -73,12 +73,12 @@ export const Login = () => {
             </div>
           </div>
         </div>
-        <GoogleLogin
+        {/* <GoogleLogin
           onSuccess={handleAuthGoogle}
           onError={() => {
             console.log("Login Failed");
           }}
-        />
+        /> */}
       </div>
     </form>
   );

@@ -28,4 +28,10 @@ const movieSchema = new mongoose.Schema({
   ],
 });
 
+movieSchema.methods.toJSON = function () {
+  const { __v, ...movie } = this.toObject();
+
+  return movie;
+};
+
 export default mongoose.model("movie", movieSchema);

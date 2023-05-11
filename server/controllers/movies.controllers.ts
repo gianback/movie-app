@@ -83,14 +83,17 @@ export const addFavoriteMovie = async (req: Request, res: Response) => {
 
   if (!user) return res.status(404).json({ message: "User not found" });
 
-  const movieIdList = user.favorite_movies.map((movie) => movie.toString());
+  const isMovieFound = user.favorite_movies.find(
+    (movie) => movie.toString() === movieId
+  );
 
-  if (movieIdList?.includes(movieId)) {
+  if (isMovieFound) {
     await User.findByIdAndUpdate(
       userId,
       { $pull: { favorite_movies: movieId } },
       { new: true }
     );
+
     return res.status(200).json({
       message: "Favorite Movie List updated successfully",
     });

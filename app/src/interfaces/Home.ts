@@ -1,4 +1,3 @@
-
 export interface Home {
   page: number;
   results: Result[];
@@ -26,7 +25,6 @@ export interface Movie {
   title: string;
   description: string;
   comments: Comment[];
-  __v: number;
 }
 export interface Comment {
   content: string;

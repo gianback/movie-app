@@ -32,3 +32,14 @@ textarea {
 textarea {
   resize: none;
 }
+
+.Card-p {
+  height: 16rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.Button {
+  transition: all 0.5s ease;
+}

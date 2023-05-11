@@ -1,4 +1,5 @@
-import { Auth, User } from "../interfaces/auth.interface";
+import { Auth } from "../interfaces/auth.interface";
+import { User } from "../interfaces/user.interface";
 import userSchema from "../models/User";
 import { encryp, verify } from "./bycript";
 import { generateToken } from "./jwt";

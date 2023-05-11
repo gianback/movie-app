@@ -9,7 +9,7 @@ export const profileController = async (req: RequestExt, res: Response) => {
     description: 1,
     image_primary: 1,
     image_secondary: 1,
-    _id: 0,
+    _id: 1,
   });
   res.status(200).json({ user: userData });
 };

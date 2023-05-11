@@ -24,8 +24,8 @@ router.post(
 
 router.get("/movies", checkJwt, getMovies);
 
-router.get("/movies/:id", getMoviesById);
+router.get("/movies/:id", checkJwt, getMoviesById);
 
-router.post("/favorite-movies", addFavoriteMovie);
+router.post("/favorite-movies", checkJwt, addFavoriteMovie);
 
 export default router;

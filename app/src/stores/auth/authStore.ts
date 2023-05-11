@@ -1,19 +1,26 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import { Movie } from "../../interfaces/Home";
 
+const INITIAL_PROFILE: Profile = {
+  uid: "",
+  email: "",
+  names: "",
+  last_names: "",
+  favorite_movies: [],
+};
 export interface Profile {
-  id: string;
+  uid: string;
   email: string;
-  name: string;
+  names: string;
   last_names: string;
-  createdAt: Date;
-  updatedAt: Date;
+  favorite_movies: Movie[];
 }
 
 type State = {
   token: string;
   // profile: Profile;
-  profile: any;
+  profile: Profile;
   isAuth: boolean;
   errors: any;
 };
@@ -22,8 +29,8 @@ type Actions = {
   setToken: (token: string) => void;
   setProfile: (profile: any) => void;
   setIsAuth: (isAuth: boolean) => void;
-  // register: (user: any) => void;
   // logout: () => void;
+  // register: (user: any) => void;
   // cleanErrors: () => void;
 };
 
@@ -31,12 +38,12 @@ export const useAuthStore = create(
   persist<State & Actions>(
     (set) => ({
       token: "",
-      profile: "",
+      profile: INITIAL_PROFILE,
       isAuth: false,
       errors: null,
       setToken: (token: string) => set((state) => ({ token })),
-      setProfile: (profile: any) => set((state) => ({ profile })),
-      setIsAuth: (isAuth: any) => set((state) => ({ isAuth })),
+      setProfile: (profile: Profile) => set((state) => ({ profile })),
+      setIsAuth: (isAuth: boolean) => set((state) => ({ isAuth })),
     }),
     {
       name: "auth",

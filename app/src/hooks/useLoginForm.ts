@@ -13,7 +13,6 @@ interface InitialLoginState {
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
-  const setUser = userStore((state) => state.setUser);
 
   const [errors, setErrors] = useState<InitialLoginState>({
     email: "",

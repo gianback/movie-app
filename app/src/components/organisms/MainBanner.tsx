@@ -6,7 +6,6 @@ import "../../styles/home/MainBanner.css";
 import { Autoplay, SwiperOptions } from "swiper";
 import { Movie } from "../../interfaces/Home";
 import MainMovieBanner from "../molecules/MainMovieBanner";
-import { useFavoriteStore } from "../../stores/movies/favorites.movies.store";
 interface MainBannerProps {
   movies: Movie[];
 }

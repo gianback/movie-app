@@ -1,12 +1,22 @@
 import React from "react";
-import defaultImg from "../../public/default_img.png";
-import logo from "../../public/logo.png";
+//hooks
 import { useAuthStore } from "../../stores/auth/authStore";
+//components
 import { MenuList } from "../atoms";
 import { Link } from "react-router-dom";
+//images
+import defaultImg from "../../public/default_img.png";
+import logo from "../../public/logo.png";
 
 export function Navbar() {
   const { last_names, names } = useAuthStore((state) => state.profile);
+  const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const setToken = useAuthStore((state) => state.setToken);
+
+  const handleLogOut = () => {
+    setIsAuth(false);
+    setToken("");
+  };
 
   return (
     <nav className="flex justify-between items-center">
@@ -22,14 +32,14 @@ export function Navbar() {
           <figure className="w-16 h-16 rounded-full overflow-hidden">
             <img src={defaultImg} alt={names} />
           </figure>
-          <div className="Header-options-menu">
-            <ul>
-              <li>
-                <Link to={"/favorites"}>Mis Peliculas Favoritas</Link>
-              </li>
-              <li>Log out</li>
-            </ul>
-          </div>
+          <ul className="Header-options-menu">
+            <li className="text-xl font-normal">
+              <Link to={"/favorites"}>Mis Peliculas Favoritas</Link>
+            </li>
+            <li className="text-xl ">
+              <button onClick={handleLogOut}>Log out</button>
+            </li>
+          </ul>
         </div>
         <div className="flex flex-col text-2xl font-medium tracking-wider">
           <span>{names}</span>

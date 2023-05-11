@@ -29,6 +29,10 @@ const router = createBrowserRouter([
         element: <Favorites />,
         errorElement: <Error404 />,
       },
+      // {
+      //   path:'/movie/:id',
+      //   element:
+      // }
     ],
   },
   {
