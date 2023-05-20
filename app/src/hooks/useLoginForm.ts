@@ -1,7 +1,5 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { userStore } from "../stores/user/user.store";
 import { showErrors } from "../utilities/utils";
 import { useAuthStore } from "../stores/auth/authStore";
 import { profileRequest } from "../services/profile.service";
@@ -12,8 +10,6 @@ interface InitialLoginState {
 }
 
 export const useLoginForm = () => {
-  const navigate = useNavigate();
-
   const [errors, setErrors] = useState<InitialLoginState>({
     email: "",
     password: "",
@@ -24,6 +20,7 @@ export const useLoginForm = () => {
 
     const formData = new FormData(e.currentTarget);
     const setToken = useAuthStore.getState().setToken;
+    const setIsAuth = useAuthStore.getState().setIsAuth;
     const setProfile = useAuthStore.getState().setProfile;
     const userData = {
       email: formData.get("email"),
@@ -48,7 +45,7 @@ export const useLoginForm = () => {
       const { data } = await profileRequest();
 
       setProfile(data.user);
-      navigate("/");
+      setIsAuth(true);
     } catch (error) {
       console.log(error);
     }

@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Movie } from "../../interfaces/Home";
 import "../../styles/home/MainBanner.css";
-import { useAuthStore } from "../../stores/auth/authStore";
-import { addFavoriteMovie } from "../../services/fetch.movies.service";
 import { useAddFavoriteMovie } from "../../hooks/useAddFavoriteMovie";
+import { Button } from "../atoms";
+import { useAuthStore } from "../../stores/auth/authStore";
+import { verifyFavoriteMovie } from "../../utilities/utils";
 
 interface MainMovieBannerProps {
   movie: Movie;
 }
 const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
-  const profile = useAuthStore((state) => state.profile);
-  const { updateFavoriteMovieList } = useAddFavoriteMovie(movie);
+  const { updateFavoriteMovieList } = useAddFavoriteMovie();
+  const [isFavoriteMovie, setIsFavoriteMovie] = useState(false);
+  const { uid } = useAuthStore((store) => store.profile);
+
   const handleAddFavoriteMovie = async (movieId: string) => {
-    const message = await updateFavoriteMovieList(movieId);
+    const { action } = await updateFavoriteMovieList(movieId);
+
+    if (action === "added") {
+      setIsFavoriteMovie(true);
+    } else {
+      setIsFavoriteMovie(false);
+    }
+
     //TODO: ALERT FOR MESSAGE
-    console.log(message);
+    console.log(action);
   };
+
+  useEffect(() => {
+    verifyFavoriteMovie(uid, setIsFavoriteMovie, movie._id);
+  }, [movie]);
 
   return (
     <>
@@ -42,20 +56,18 @@ const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
           <div className="MainBanner-movie-info">
             <h1>{movie.title}</h1>
             <p>{movie.description}</p>
-            <div>
-              <button
-                className="MainBanner-movie-btn"
+            <div className="flex gap-12">
+              <Button
+                type="secondary"
                 onClick={() => handleAddFavoriteMovie(movie._id)}
               >
-                {profile.favorite_movies.find(
-                  (fav_movie) => fav_movie._id === movie._id
-                )
+                {isFavoriteMovie
                   ? "Eliminar de mis favoritos"
                   : "Agregar a mis favoritos"}
-              </button>
-              <a className="MainBanner-movie-btn review" href="/">
+              </Button>
+              <Button type="secondary" url={`/movies/${movie._id}`}>
                 Escribir un comentario
-              </a>
+              </Button>
             </div>
           </div>
         </div>

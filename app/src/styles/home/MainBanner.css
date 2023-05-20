@@ -2,8 +2,6 @@
   @apply bg-primary py-[5rem];
   min-height: 100vh;
   &-active {
-    /* animation-name: fadeIn;
-    animation-duration: 1s; */
     opacity: 1;
     transition: opacity 0.5s ease;
   }
@@ -40,27 +38,9 @@
       }
     }
     &-btn {
-      @apply font-semibold inline-flex bg-orange-600 px-[3rem] py-[2rem] mt-[3rem] isolate relative overflow-hidden;
+      @apply font-semibold inline-flex bg-white text-primary px-[2.5rem] py-[1.5rem] mt-[3rem] isolate relative overflow-hidden;
       border-radius: 1rem;
-      &::after {
-        @apply absolute inset-0;
-        content: "";
-        background: linear-gradient(
-          90deg,
-          rgba(107, 63, 251, 1) 0%,
-          rgba(25, 13, 41, 1) 100%
-        );
-        opacity: 0;
-        z-index: -1;
-        transition: opacity 0.8s ease;
-      }
-      @media (hover: hover) {
-        &:hover {
-          &::after {
-            opacity: 1;
-          }
-        }
-      }
+
       &.review {
         @apply ml-[4rem];
       }

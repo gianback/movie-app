@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useMemo, useRef } from "react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Container from "../globals/Container";

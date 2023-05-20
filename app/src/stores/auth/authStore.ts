@@ -7,14 +7,12 @@ const INITIAL_PROFILE: Profile = {
   email: "",
   names: "",
   last_names: "",
-  favorite_movies: [],
 };
 export interface Profile {
   uid: string;
   email: string;
   names: string;
   last_names: string;
-  favorite_movies: Movie[];
 }
 
 type State = {

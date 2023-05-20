@@ -1,14 +1,20 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { MovieCard } from "../molecules/MovieCard";
-import { useAuthStore } from "../../stores/auth/authStore";
+import { Movie } from "../../interfaces/Home";
 
-export function FavoriteMovieList() {
-  const { favorite_movies } = useAuthStore((state) => state.profile);
+interface FavoriteMovieListProps {
+  movies: Movie[];
+  updateMovies: () => void;
+}
 
+export function FavoriteMovieList({
+  movies,
+  updateMovies,
+}: FavoriteMovieListProps) {
   return (
-    <div className="grid xl:gap-[6rem] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {favorite_movies.map((movie) => (
-        <MovieCard key={movie._id} movie={movie} />
+    <div className="grid xl:gap-[6rem] md:grid-cols-2 lg:grid-cols-3 ">
+      {movies.map((movie) => (
+        <MovieCard updateMovies={updateMovies} key={movie._id} movie={movie} />
       ))}
     </div>
   );

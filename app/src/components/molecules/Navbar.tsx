@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 //hooks
 import { useAuthStore } from "../../stores/auth/authStore";
 //components
@@ -9,13 +9,19 @@ import defaultImg from "../../public/default_img.png";
 import logo from "../../public/logo.png";
 
 export function Navbar() {
+  const [isProfileMenuActive, setisProfileMenuActive] = useState(false);
   const { last_names, names } = useAuthStore((state) => state.profile);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
   const setToken = useAuthStore((state) => state.setToken);
 
   const handleLogOut = () => {
     setIsAuth(false);
+    handleProfileMenu(false);
     setToken("");
+  };
+
+  const handleProfileMenu = (isActive: boolean) => {
+    setisProfileMenuActive(isActive);
   };
 
   return (
@@ -28,13 +34,19 @@ export function Navbar() {
       </div>
 
       <div className="flex gap-4 relative">
-        <div className="Header-options">
+        <div
+          className={`Header-options ${isProfileMenuActive && "isActive"}`}
+          onMouseEnter={() => handleProfileMenu(true)}
+          onMouseLeave={() => handleProfileMenu(false)}
+        >
           <figure className="w-16 h-16 rounded-full overflow-hidden">
             <img src={defaultImg} alt={names} />
           </figure>
           <ul className="Header-options-menu">
             <li className="text-xl font-normal">
-              <Link to={"/favorites"}>Mis Peliculas Favoritas</Link>
+              <Link to={"/favorites"} onClick={() => handleProfileMenu(false)}>
+                Mis Peliculas Favoritas
+              </Link>
             </li>
             <li className="text-xl ">
               <button onClick={handleLogOut}>Log out</button>

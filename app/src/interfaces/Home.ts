@@ -27,8 +27,10 @@ export interface Movie {
   comments: Comment[];
 }
 export interface Comment {
-  content: string;
-  commend: boolean;
+  comment: string;
+  date: Date;
+  qualification: number;
+  _id: string;
 }
 
 export interface ImageAry {

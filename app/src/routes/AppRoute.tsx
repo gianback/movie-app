@@ -11,6 +11,7 @@ import {
   HomePage,
   loaderHomeMovies,
 } from "../pages";
+import { MovieDetails, loaderDetailsMovies } from "../pages/movie";
 
 const router = createBrowserRouter([
   {
@@ -29,10 +30,12 @@ const router = createBrowserRouter([
         element: <Favorites />,
         errorElement: <Error404 />,
       },
-      // {
-      //   path:'/movie/:id',
-      //   element:
-      // }
+      {
+        path: "movies/:id",
+        element: <MovieDetails />,
+        loader: loaderDetailsMovies,
+        errorElement: <Error404 />,
+      },
     ],
   },
   {
