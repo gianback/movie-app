@@ -1,10 +1,12 @@
 import express from "express";
-import fileUpload from "express-fileupload";
-import moviesRouter from "./routes/movies.routes";
 import cors from "cors";
-import commentsRouter from "./routes/comments.routes";
-import loginRouter from "./routes/auth.routes";
-import verifyToken from "./routes/verify.token.routes";
+import fileUpload from "express-fileupload";
+import {
+  commentsRoutes,
+  moviesRoutes,
+  verifyTokenRoutes,
+  authRoutes,
+} from "./routes";
 
 const app = express();
 
@@ -17,6 +19,7 @@ app.use(
     tempFileDir: "./upload",
   })
 );
+
 //cors
 app.use(
   cors({
@@ -25,9 +28,9 @@ app.use(
   })
 );
 
-app.use("/api", moviesRouter);
-app.use("/api", commentsRouter);
-app.use("/", loginRouter);
-app.use("/", verifyToken);
+app.use("/api", moviesRoutes);
+app.use("/api", commentsRoutes);
+app.use("/", authRoutes);
+app.use("/", verifyTokenRoutes);
 
 export default app;

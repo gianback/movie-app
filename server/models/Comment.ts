@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema<Comment>({
     type: Date,
   },
   qualification: {
-    type: Number,
+    type: String,
     required: true,
   },
   movieId: {

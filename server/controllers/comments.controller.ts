@@ -2,13 +2,8 @@ import { Response, Request } from "express";
 import Comment from "../models/Comment";
 import Movie from "../models/Movie";
 
-export const getComments = async (_req: Request, res: Response) => {
-  const comments = await Comment.find();
-  res.send(comments);
-};
-
 export const createComment = async (req: Request, res: Response) => {
-  const { comment, qualification, movieId } = req.body;
+  const { payload, qualification, movieId } = req.body.formData;
 
   const movie = await Movie.findById(movieId);
 
@@ -16,10 +11,10 @@ export const createComment = async (req: Request, res: Response) => {
     return res.status(404).json({ status: 404, message: "Movie not found" });
 
   const newComment = await new Comment({
-    comment,
+    payload,
     qualification,
     date: new Date(),
-    movieId: movie?._id,
+    movieId: movie._id,
   });
 
   try {

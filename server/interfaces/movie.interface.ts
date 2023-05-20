@@ -16,6 +16,6 @@ type ImageCloudinary = {
 export type Comment = {
   comment: string;
   date: Date;
-  qualification: number;
+  qualification: string;
   movieId: ObjectId;
 };

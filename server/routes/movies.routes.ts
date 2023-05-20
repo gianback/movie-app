@@ -4,6 +4,7 @@ import {
   getMoviesById,
   createMovie,
   addFavoriteMovie,
+  getMovieByUserId,
 } from "../controllers/movies.controllers";
 import { check } from "express-validator";
 import { validateInputs } from "../middlewares/validateInput";
@@ -27,5 +28,6 @@ router.get("/movies", checkJwt, getMovies);
 router.get("/movies/:id", checkJwt, getMoviesById);
 
 router.post("/favorite-movies", checkJwt, addFavoriteMovie);
+router.get("/favorite-movies/:userId", checkJwt, getMovieByUserId);
 
 export default router;

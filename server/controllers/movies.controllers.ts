@@ -47,9 +47,15 @@ export const createMovie = async (req: Request, res: Response) => {
 export const getMoviesById = async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ msg: "Movie not found" });
+    return res.status(400).json({ message: "invalid Id" });
   }
-  const movie = await Movie.findById(req.params.id);
+  const movie = await Movie.findById(req.params.id).populate("comments", {
+    comment: 1,
+    qualification: 1,
+    date: 1,
+    _id: 1,
+  });
+  if (!movie) return res.status(404).json({ message: "Movie not found" });
   return res.send(movie);
 };
 
@@ -96,13 +102,25 @@ export const addFavoriteMovie = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Favorite Movie List updated successfully",
+      action: "removed",
     });
   } else {
     user.favorite_movies.push(movieId);
     await user.save();
 
     return res.status(200).json({
-      message: "Película agregada a la lista de favoritos correctamente",
+      message: "Favorite Movie was added successfully",
+      action: "added",
     });
   }
+};
+
+export const getMovieByUserId = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+
+  const user = await User.findById(userId).populate("favorite_movies");
+
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  return res.json(user.favorite_movies);
 };
