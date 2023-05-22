@@ -9,7 +9,7 @@ export const getMovies = async (_req: Request, res: Response) => {
   //metodo populate es como un join, pero no es transaccional, es decir, si este documento lo estamos pidiendo pero en otro lugar lo editan o borran, igual lo trae. lo correcto es que se debe bloquear
   //1er parametro referencia en plural y el segundo parametro pasamos con 1 a los que si queremos y en 0 a los que no, por defecto trae todos las propiedades.
   const movies = await Movie.find().populate("comments", {
-    comment: 1,
+    content: 1,
     qualification: 1,
     date: 1,
     _id: 0,
@@ -50,7 +50,7 @@ export const getMoviesById = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "invalid Id" });
   }
   const movie = await Movie.findById(req.params.id).populate("comments", {
-    comment: 1,
+    content: 1,
     qualification: 1,
     date: 1,
     _id: 1,

@@ -9,13 +9,17 @@ const socketMovie = manager.socket("/api/movies");
 socketMovie.on("connect", () => {
   console.log("Connected to server!");
 });
-export const updateComments = ({ payload, token }) => {
-  socketMovie.emit("client:update-comments", {
+
+export const saveComment = ({ payload, token }) => {
+  socketMovie.emit("client:save-comment", {
     payload,
     token,
   });
 };
 
-export const loadUpdateComments = (callback) => {
-  socketMovie.on("server:update-comments", callback);
+export const loadComments = (setCommentList) => {
+  socketMovie.on("server:new-comment", (commentList) => {
+    console.log(commentList);
+    setCommentList(commentList);
+  });
 };

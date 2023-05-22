@@ -4,10 +4,10 @@ import {
   fetchMovieById,
 } from "../../services/fetch.movies.service";
 import { useLoaderData } from "react-router-dom";
-import { Movie } from "../../interfaces/Home";
+import { Comment, Movie } from "../../interfaces/Home";
 import { Container } from "../../components/globals";
 import { Button } from "../../components/atoms";
-import { updateComments } from "../../sockets/movie.socket";
+import { loadComments, saveComment } from "../../sockets/movie.socket";
 import { useAuthStore } from "../../stores/auth/authStore";
 import { verifyFavoriteMovie } from "../../utilities/utils";
 import { useAddFavoriteMovie } from "../../hooks/useAddFavoriteMovie";
@@ -21,24 +21,19 @@ export function MovieDetails() {
   const [qualification, setQualification] = useState("");
   const [isFavoriteMovie, setisFavoriteMovie] = useState(false);
   const { updateFavoriteMovieList } = useAddFavoriteMovie();
+  const [comments, setComments] = useState<Comment[]>([]);
+  //store
   const { uid } = useAuthStore((state) => state.profile);
   const token = useAuthStore((state) => state.token);
-  const { comments, description, image_primary, image_secondary, title, _id } =
-    movie;
+  const {
+    description,
+    image_primary,
+    image_secondary,
+    title,
+    _id,
+    comments: commentList,
+  } = movie;
   //socket
-
-  const handleSubmitComment = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-
-    const payload = {
-      comment: formData.get("comment"),
-      qualification,
-      movieId: _id,
-    };
-    updateComments({ payload, token });
-  };
-
   const handleAddFavoriteMovie = async () => {
     const { action } = await updateFavoriteMovieList(_id);
     if (action === "added") {
@@ -47,9 +42,26 @@ export function MovieDetails() {
       setisFavoriteMovie(false);
     }
   };
+  const handleSubmitComment = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const payload = {
+      content: formData.get("comment"),
+      qualification,
+      movieId: _id,
+    };
+    saveComment({ payload, token });
+
+    loadComments(setComments);
+  };
 
   useEffect(() => {
     verifyFavoriteMovie(uid, setisFavoriteMovie, _id);
+  }, []);
+
+  useEffect(() => {
+    setComments(commentList);
   }, []);
 
   return (
@@ -87,11 +99,11 @@ export function MovieDetails() {
         <section className="mt-20">
           <h2 className="text-6xl text-white font-bold">Comentarios</h2>
           {comments.length > 0 ? (
-            comments.map(({ _id, comment, date, qualification }) => (
+            comments.map(({ _id, content, date, qualification }) => (
               <div key={_id}>
-                <p className="text-white text-3xl ">{comment}</p>
-                <p className="text-white text-3xl ">{date.toString()}</p>
-                <p className="text-white text-3xl ">{qualification}</p>
+                <p className="text-white text-3xl ">{content}</p>
+                {/* <p className="text-white text-3xl ">{date.toString()}</p> */}
+                {/* <p className="text-white text-3xl ">{qualification}</p> */}
               </div>
             ))
           ) : (
