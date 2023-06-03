@@ -27,7 +27,7 @@ export interface Movie {
   comments: Comment[];
 }
 export interface Comment {
-  comment: string;
+  content: string;
   date: Date;
   qualification: number;
   _id: string;

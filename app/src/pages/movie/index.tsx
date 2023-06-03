@@ -1,8 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import {
-  addFavoriteMovie,
-  fetchMovieById,
-} from "../../services/fetch.movies.service";
+import { fetchMovieById } from "../../services/fetch.movies.service";
 import { useLoaderData } from "react-router-dom";
 import { Comment, Movie } from "../../interfaces/Home";
 import { Container } from "../../components/globals";

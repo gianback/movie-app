@@ -7,11 +7,6 @@ const menuList = [
     title: "Home",
     url: "/",
   },
-  {
-    id: 2,
-    title: "Estrenos",
-    url: "/estrenos",
-  },
 ];
 export function MenuList() {
   return (
