@@ -1,7 +1,8 @@
+import mongoose from "mongoose";
 import { Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
-import mongoose from "mongoose";
-import Movie from "../models/Movie";
+
+import { Movie } from "../models/Movie";
 import { extractPublicIdAndSecureUrl } from "../services/cloudinary";
 import User from "../models/User";
 

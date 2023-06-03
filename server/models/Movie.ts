@@ -1,5 +1,9 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
+import { IMovie } from "../interfaces/movie.interface";
 
+export interface IMovieModel extends Model<IMovie> {
+  addCommentToMovie(movieId: string, commentId: string): Promise<void>;
+}
 const movieSchema = new mongoose.Schema(
   {
     title: {
@@ -39,9 +43,12 @@ movieSchema.methods.toJSON = function () {
 
   return movie;
 };
-movieSchema.statics.addCommentToMovie = async function (movieId, commentId) {
+movieSchema.statics.addCommentToMovie = async function (
+  movieId: any,
+  commentId: any
+) {
   await this.findByIdAndUpdate(movieId, {
     $push: { comments: commentId },
   });
 };
-export default mongoose.model("movie", movieSchema);
+export const Movie = mongoose.model<IMovie, IMovieModel>("movie", movieSchema);

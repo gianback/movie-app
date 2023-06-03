@@ -6,8 +6,9 @@ export const validateRegister = (
   res: Response,
   next: NextFunction
 ) => {
-  const newUser = req.body;
-  const { error } = schema.validate(newUser, {
+  const { formData } = req.body;
+
+  const { error } = schema.validate(formData, {
     abortEarly: false,
   });
 
@@ -16,8 +17,7 @@ export const validateRegister = (
       message: error.message,
       field: error.context?.key,
     }));
-    res.json(errorsFormated);
-    return;
+    return res.status(401).json(errorsFormated);
   }
 
   next();

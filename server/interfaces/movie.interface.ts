@@ -10,10 +10,11 @@ export interface IMovie {
 
 type ImageCloudinary = {
   public_id: string;
-  secure_udl: string;
+  secure_url: string;
 };
 
 export type Comment = {
+  _id: string;
   content: string;
   date: Date;
   qualification: string;

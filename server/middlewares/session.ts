@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { verify } from "jsonwebtoken";
-import { JWT_SECRET } from "../utilities/constants";
 import { RequestExt } from "../types/express";
+import { JWT_SECRET } from "../config";
 
 export const checkJwt = (
   req: RequestExt,

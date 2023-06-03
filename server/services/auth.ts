@@ -9,7 +9,7 @@ export const registerNewUser = async ({ email, password, ...user }: User) => {
   if (checkUser) {
     return "ALREADY USER";
   }
-  const passHash = await encryp(password);
+  const passHash: string = await encryp(password);
   const createUser = await userSchema.create({
     email,
     password: passHash,
@@ -21,16 +21,14 @@ export const registerNewUser = async ({ email, password, ...user }: User) => {
 
 export const loginUser = async ({ email, password }: Auth) => {
   const checkIs = await userSchema.findOne({ email });
-  if (!checkIs) return { message: "EMAIL_ERROR" };
+  if (!checkIs) return { message: "Credenciales invalidas :(" };
 
   const passwordHash = checkIs.password;
   const isCorrect = await verify(password, passwordHash);
 
-  if (!isCorrect) return { message: "PASSWORD_ERROR" };
+  if (!isCorrect) return { message: "Credenciales invalidas :(" };
 
   const token = generateToken(checkIs.email);
-  const data = {
-    token,
-  };
-  return data;
+
+  return { token };
 };

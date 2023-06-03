@@ -1,9 +1,10 @@
 import { Socket } from "socket.io";
-import { JWT_SECRET } from "../utilities/constants";
 
 import { verify } from "jsonwebtoken";
 import Comment from "../models/Comment";
-import Movie from "../models/Movie";
+import { Movie } from "../models/Movie";
+import { Comment as ICommnet } from "../interfaces/movie.interface";
+import { JWT_SECRET } from "../config";
 
 const socketMiddleware = (socket: any, next: (err?: any) => void) => {
   const { token } = socket;
@@ -27,21 +28,15 @@ export const movieSocket = (socket: Socket) => {
       date: Date.now(),
     });
 
-    const savedComment = await newComment.save();
-
+    const savedComment: ICommnet = await newComment.save();
     await Movie.addCommentToMovie(payload.movieId, savedComment._id);
 
-    const { comments } = await Movie.findById(payload.movieId).populate(
-      "comments",
-      {
-        content: 1,
-        qualification: 1,
-        date: 1,
-        _id: 1,
-      }
-    );
-    // console.log(movieComments);
-
-    socket.emit("server:new-comment", comments);
+    const user = await Movie.findById(payload.movieId).populate("comments", {
+      content: 1,
+      qualification: 1,
+      date: 1,
+      _id: 1,
+    });
+    socket.emit("server:new-comment", user?.comments);
   });
 };
