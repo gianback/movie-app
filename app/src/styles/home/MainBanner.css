@@ -1,19 +1,19 @@
 .MainBanner {
   @apply bg-primary py-[5rem];
   min-height: 100vh;
-  &-active {
-    opacity: 1;
-    transition: opacity 0.5s ease;
-  }
-  &-noActive {
-    opacity: 0;
-  }
+  /* opacity: 0; */
+
+  /* &-noActive {
+  } */
   &-movie {
     @apply grid grid-cols-2;
-    animation-name: fadeIn;
-    animation-duration: 0.5s;
-    transition: opacity 0.5s ease;
     gap: 8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+    &.fadeIn {
+      opacity: 1;
+    }
+
     &-pictures {
       @apply flex;
       picture {
@@ -70,5 +70,13 @@
   }
   to {
     opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

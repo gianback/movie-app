@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useMemo, useRef } from "react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Container from "../globals/Container";
-import "../../styles/home/MainBanner.css";
 import { Autoplay, SwiperOptions } from "swiper";
+
+import Container from "../globals/Container";
 import { Movie } from "../../interfaces/Home";
 import MainMovieBanner from "../molecules/MainMovieBanner";
+import "../../styles/home/MainBanner.css";
 interface MainBannerProps {
   movies: Movie[];
 }
@@ -49,7 +50,11 @@ const swiperOptions: SwiperOptions = {
 const MainBanner = ({ movies }: MainBannerProps) => {
   const [indexCurrentMovie, setIndexCurrentMovie] = useState<number>(0);
   const handleClickMovie = (index: number) => {
-    setIndexCurrentMovie(index);
+    document.querySelector(".MainBanner-movie")?.classList.remove("fadeIn");
+    setTimeout(() => {
+      setIndexCurrentMovie(index);
+      document.querySelector(".MainBanner-movie")?.classList.add("fadeIn");
+    }, 300);
   };
 
   return (

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Movie } from "../../interfaces/Home";
-import "../../styles/home/MainBanner.css";
 import { useAddFavoriteMovie } from "../../hooks/useAddFavoriteMovie";
 import { Button } from "../atoms";
 import { useAuthStore } from "../../stores/auth/authStore";
@@ -34,12 +33,8 @@ const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
   return (
     <>
       {movie && (
-        <div className="MainBanner-movie">
-          <div
-            className={`MainBanner-movie-pictures ${
-              movie._id ? "active" : "noActive"
-            }`}
-          >
+        <div className={`MainBanner-movie `}>
+          <div className={`MainBanner-movie-pictures`}>
             <picture>
               <img
                 src={movie.image_primary.secure_url}
