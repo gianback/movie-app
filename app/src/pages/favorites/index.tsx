@@ -8,10 +8,17 @@ import { fetchMovieByUser } from "../../services/fetch.movies.service";
 export function Favorites() {
   const [favoriteMovieList, setFavoriteMovieList] = useState<Movie[]>([]);
   const { uid } = useAuthStore((state) => state.profile);
-
+  const [isLoading, setIsLoading] = useState(false);
   const getFavoritesMovie = async () => {
-    const movieList = await fetchMovieByUser(uid);
-    setFavoriteMovieList(movieList);
+    try {
+      setIsLoading(true);
+      const movieList = await fetchMovieByUser(uid);
+      setFavoriteMovieList(movieList);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -25,10 +32,8 @@ export function Favorites() {
   return (
     <main className="min-h-[83.5vh] bg-primary py-20">
       <Container>
-        {favoriteMovieList.length === 0 ? (
-          <div className="uppercase text-center text-3xl font-medium py-12">
-            Aun no tienes ninguna pelicula marcada como favorita
-          </div>
+        {isLoading ? (
+          <p className="text-white">Cargando</p>
         ) : (
           <FavoriteMovieList
             updateMovies={getFavoritesMovie}

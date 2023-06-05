@@ -5,7 +5,7 @@ import { Autoplay, SwiperOptions } from "swiper";
 
 import Container from "../globals/Container";
 import { Movie } from "../../interfaces/Home";
-import MainMovieBanner from "../molecules/MainMovieBanner";
+import { MainMovieBanner } from "../molecules";
 import "../../styles/home/MainBanner.css";
 interface MainBannerProps {
   movies: Movie[];
@@ -47,7 +47,7 @@ const swiperOptions: SwiperOptions = {
   modules: [Autoplay],
 };
 
-const MainBanner = ({ movies }: MainBannerProps) => {
+export const MainBanner = ({ movies }: MainBannerProps) => {
   const [indexCurrentMovie, setIndexCurrentMovie] = useState<number>(0);
   const handleClickMovie = (index: number) => {
     document.querySelector(".MainBanner-movie")?.classList.remove("fadeIn");
@@ -73,7 +73,6 @@ const MainBanner = ({ movies }: MainBannerProps) => {
               <div>
                 <picture>
                   <img src={image_secondary.secure_url} alt={title} />
-                  <span>⭐</span>
                 </picture>
                 <h2>{title}</h2>
               </div>
@@ -84,5 +83,3 @@ const MainBanner = ({ movies }: MainBannerProps) => {
     </div>
   );
 };
-
-export default MainBanner;

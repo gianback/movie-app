@@ -11,13 +11,27 @@ export const showErrors = (errors, setErrors) => {
   }
 };
 
-export const verifyFavoriteMovie = async (
-  userId: string,
-  setIsFavoriteMovie,
-  movieId: string
-) => {
-  const favoriteMovieList = await fetchMovieByUser(userId);
+export const formatTime = (date: string): string => {
+  const newDate = new Date(date);
 
-  const isMovieFavorite = favoriteMovieList.some(({ _id }) => _id === movieId);
-  setIsFavoriteMovie(isMovieFavorite);
+  const time = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+  }).format(newDate);
+  if (newDate.toDateString() === new Date().toDateString())
+    return `Hoy a las ${time}`;
+
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  if (yesterday.toDateString() === newDate.toDateString())
+    return `Ayer a las ${time}`;
+
+  return new Intl.DateTimeFormat("en-US", {
+    month: "2-digit",
+    year: "2-digit",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "numeric",
+  }).format(newDate);
 };

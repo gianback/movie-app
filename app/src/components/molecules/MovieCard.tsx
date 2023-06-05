@@ -1,8 +1,8 @@
 import React from "react";
 import { Movie } from "../../interfaces/Home";
 import { useNavigate } from "react-router-dom";
-import { useAddFavoriteMovie } from "../../hooks/useAddFavoriteMovie";
 import { Button } from "../atoms";
+import { useFavoriteMovie } from "../../hooks/useFavoriteMovie";
 
 interface MovieCardProps {
   movie: Movie;
@@ -11,7 +11,7 @@ interface MovieCardProps {
 
 export function MovieCard({ movie, updateMovies }: MovieCardProps) {
   const navigate = useNavigate();
-  const { updateFavoriteMovieList } = useAddFavoriteMovie();
+  const { updateFavoriteMovieList } = useFavoriteMovie();
   const { description, image_primary, title, _id } = movie;
 
   const handleGoToMovieDetail = () => {

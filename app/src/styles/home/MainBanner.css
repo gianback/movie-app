@@ -1,10 +1,7 @@
 .MainBanner {
   @apply bg-primary py-[5rem];
   min-height: 100vh;
-  /* opacity: 0; */
 
-  /* &-noActive {
-  } */
   &-movie {
     @apply grid grid-cols-2;
     gap: 8rem;
@@ -32,13 +29,12 @@
         @apply text-[7rem] leading-[8rem] mb-[3rem];
       }
       p,
-      button,
-      a {
+      button {
         @apply text-[2rem];
       }
     }
     &-btn {
-      @apply font-semibold inline-flex bg-white text-primary px-[2.5rem] py-[1.5rem] mt-[3rem] isolate relative overflow-hidden;
+      @apply font-semibold  inline-flex bg-white text-primary px-[2.5rem] py-[1.5rem] mt-[3rem] isolate relative overflow-hidden;
       border-radius: 1rem;
 
       &.review {

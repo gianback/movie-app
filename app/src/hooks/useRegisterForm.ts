@@ -1,9 +1,23 @@
 import { FormEvent, useState } from "react";
 import { showErrors } from "../utilities/utils";
 import { baseApi } from "../utilities/baseApi";
-import { toast } from "react-toastify";
+import { ToastOptions, toast } from "react-toastify";
 import { useAuthStore } from "../stores/auth/authStore";
 
+const toastConfigMssgError: ToastOptions = {
+  position: "top-center",
+  autoClose: 3000,
+  type: "error",
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  style: {
+    fontSize: "16px",
+  },
+};
 export const useRegisterForm = () => {
   const setToken = useAuthStore((state) => state.setToken);
   const setProfile = useAuthStore((state) => state.setProfile);
@@ -49,20 +63,7 @@ export const useRegisterForm = () => {
       setProfile(data.user);
     } catch (error) {
       if (error.response.data.message) {
-        toast(error.response.data.message, {
-          position: "top-center",
-          autoClose: 3000,
-          type: "error",
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          style: {
-            fontSize: "16px",
-          },
-        });
+        toast(error.response.data.message, toastConfigMssgError);
         return;
       }
 

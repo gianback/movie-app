@@ -1,39 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Movie } from "../../interfaces/Home";
-import { useAddFavoriteMovie } from "../../hooks/useAddFavoriteMovie";
 import { Button } from "../atoms";
-import { useAuthStore } from "../../stores/auth/authStore";
-import { verifyFavoriteMovie } from "../../utilities/utils";
 
 interface MainMovieBannerProps {
   movie: Movie;
 }
-const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
-  const { updateFavoriteMovieList } = useAddFavoriteMovie();
-  const [isFavoriteMovie, setIsFavoriteMovie] = useState(false);
-  const { uid } = useAuthStore((store) => store.profile);
-
-  const handleAddFavoriteMovie = async (movieId: string) => {
-    const { action } = await updateFavoriteMovieList(movieId);
-
-    if (action === "added") {
-      setIsFavoriteMovie(true);
-    } else {
-      setIsFavoriteMovie(false);
-    }
-
-    //TODO: ALERT FOR MESSAGE
-    console.log(action);
-  };
-
-  useEffect(() => {
-    verifyFavoriteMovie(uid, setIsFavoriteMovie, movie._id);
-  }, [movie]);
-
+export const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
   return (
     <>
       {movie && (
-        <div className={`MainBanner-movie `}>
+        <div className={`MainBanner-movie fadeIn`}>
           <div className={`MainBanner-movie-pictures`}>
             <picture>
               <img
@@ -51,15 +27,7 @@ const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
           <div className="MainBanner-movie-info">
             <h1>{movie.title}</h1>
             <p>{movie.description}</p>
-            <div className="flex gap-12">
-              <Button
-                type="secondary"
-                onClick={() => handleAddFavoriteMovie(movie._id)}
-              >
-                {isFavoriteMovie
-                  ? "Eliminar de mis favoritos"
-                  : "Agregar a mis favoritos"}
-              </Button>
+            <div className="flex gap-12 mt-[3rem]">
               <Button type="secondary" url={`/movies/${movie._id}`}>
                 Escribir un comentario
               </Button>
@@ -70,5 +38,3 @@ const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
     </>
   );
 };
-
-export default MainMovieBanner;

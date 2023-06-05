@@ -11,9 +11,9 @@ type Styles = "primary" | "secondary";
 
 const styles = {
   primary:
-    "Button mr-5 bg-primary hover:bg-white hover:text-primary text-white text-2xl font-medium px-[2.5rem] py-[1.5rem] rounded-md",
+    "Button whitespace-nowrap inline-flex  bg-primary hover:bg-white hover:text-primary text-white text-3xl font-medium px-[2.5rem] py-[1.5rem] rounded-md",
   secondary:
-    "Button text-2xl font-semibold inline-flex bg-white hover:bg-secondary hover:text-white rounded-md text-primary px-[2.5rem] py-[1.5rem] mt-[3rem]",
+    "Button whitespace-nowrap text-3xl font-semibold inline-flex bg-white hover:bg-secondary hover:text-white rounded-md text-primary px-[2.5rem] py-[1.5rem]",
 };
 
 export const Button: FC<ButtonProps> = ({ children, onClick, type, url }) => {
