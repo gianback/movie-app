@@ -1,57 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html {
-  font-size: 62.5%;
-}
-body {
-  &.no-scroll {
-    @apply overflow-hidden;
-  }
-}
-
-picture {
-  @apply block w-full h-full overflow-hidden;
-}
-
-img {
-  @apply max-w-full h-auto object-cover;
-}
-
-input,
-select,
-textarea {
-  @apply w-full border-none bg-none;
-
-  &:focus {
-    @apply outline-none;
-  }
-}
-
-textarea {
-  resize: none;
-}
-
-.Card-p {
-  height: 16rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.Button {
-  transition: all 0.5s ease;
-}
 .menu-icon {
-  @apply relative isolate;
+  @apply relative isolate min-h-screen;
   &.hamburguer {
     height: 5.4rem;
     width: 5.4rem;
     transition-property: background-color, height, width;
     transition-duration: 0.4s;
     transition-timing-function: ease;
-    @apply flex justify-center items-center relative cursor-pointer bg-primary;
+    @apply flex justify-center items-center relative cursor-pointer bg-red-500;
     @media screen(xl) {
       @apply hidden;
     }
@@ -59,7 +14,7 @@ textarea {
       height: 0.3rem;
       width: 2.4rem;
       transition: transform 0.5s ease, background-color 0.5s ease;
-      @apply bg-secondary inline-block absolute mx-auto rounded-2xl;
+      @apply bg-primary inline-block absolute mx-auto rounded-2xl;
     }
     span:nth-child(1) {
       transform: translateY(-0.8rem);
@@ -76,7 +31,7 @@ textarea {
       border: 2px solid white;
       @apply bg-transparent rounded-full;
       span {
-        @apply bg-secondary;
+        @apply bg-white;
       }
       span:nth-child(1) {
         transform: rotateZ(42.19deg) scale(0.45);

@@ -1,4 +1,5 @@
 .Header {
+  /*/@apply overflow-x-hidden overflow-y-visible;*/
   &-options {
     @apply relative;
     &.isActive {
@@ -18,6 +19,15 @@
           @apply bg-secondary;
         }
       }
+    }
+  }
+
+  &-overlay {
+    @apply min-h-screen bg-black opacity-0 fixed inset-0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+    &.active {
+      opacity: 1;
     }
   }
 }

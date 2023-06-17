@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Movie } from "../../interfaces/Home";
 import { Button } from "../atoms";
 
@@ -6,10 +6,21 @@ interface MainMovieBannerProps {
   movie: Movie;
 }
 export const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+
   return (
     <>
       {movie && (
         <div className={`MainBanner-movie fadeIn`}>
+          {windowWidth < 1279 && (
+            <h2 className="text-white text-[2.2rem] xl:text-[7rem] md:hidden xl:leading-[8rem] mb-[3rem];">
+              {movie.title}
+            </h2>
+          )}
           <div className={`MainBanner-movie-pictures`}>
             <picture>
               <img
@@ -25,7 +36,7 @@ export const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
             </picture>
           </div>
           <div className="MainBanner-movie-info">
-            <h1>{movie.title}</h1>
+            {windowWidth > 1279 && <h2>{movie.title}</h2>}
             <p>{movie.description}</p>
             <div className="flex gap-12 mt-[3rem]">
               <Button type="secondary" url={`/movies/${movie._id}`}>

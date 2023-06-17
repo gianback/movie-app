@@ -3,8 +3,7 @@
   min-height: 100vh;
 
   &-movie {
-    @apply grid grid-cols-2;
-    gap: 8rem;
+    @apply grid md:grid-cols-2 gap-10 xl:gap-[8rem] mt-12 xl:mt-24;
     opacity: 0;
     transition: opacity 0.3s ease-in;
     &.fadeIn {
@@ -13,24 +12,33 @@
 
     &-pictures {
       @apply flex;
-      picture {
-        img {
+      img {
+        @media screen(lg) {
           @apply w-full;
         }
+      }
+      picture {
+        &:nth-child(1) {
+          @apply hidden;
+          @media screen(md) {
+            @apply block;
+          }
+        }
         &:nth-child(2) {
-          @apply flex items-center;
-          margin-left: -10rem;
+          @media screen(md) {
+            @apply flex items-center;
+            margin-left: -10rem;
+          }
         }
       }
     }
     &-info {
       @apply text-white flex flex-col justify-center;
-      h1 {
-        @apply text-[7rem] leading-[8rem] mb-[3rem];
+      h2 {
+        @apply text-[2.2rem] xl:text-[7rem] xl:leading-[8rem] mb-[3rem];
       }
-      p,
-      button {
-        @apply text-[2rem];
+      p {
+        @apply text-[1.4rem] xl:text-[2rem];
       }
     }
     &-btn {
@@ -42,7 +50,10 @@
       }
     }
     &-swiper {
-      @apply text-center;
+      @apply text-center overflow-hidden;
+      .swiper-initialized {
+        @apply overflow-hidden max-w-full;
+      }
       picture {
         @apply flex items-center justify-center flex-col;
         margin-top: 8rem;

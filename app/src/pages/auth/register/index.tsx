@@ -8,12 +8,14 @@ export const Register = () => {
 
   return (
     <>
-      <div className="w-full py-12 min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="w-full py-20 flex-col min-h-screen flex justify-center items-center bg-gray-100">
+        <h1 className="text-[2.5rem] xl:text-[3rem] font-medium uppercase  ">
+          Registro
+        </h1>
         <form
-          className="p-10 bg-white rounded flex justify-center items-center flex-col shadow-md gap-8 w-[65rem]"
+          className="p-10 bg-white rounded-2xl mt-8 flex justify-center items-center flex-col shadow-md gap-8 w-[90%] lg:w-full  max-w-[65rem]"
           onSubmit={handleRegister}
         >
-          <h1 className="text-[3rem] font-light ">Registro</h1>
           <div className="w-full">
             <label htmlFor="name" className="block font-semibold text-[1.9rem]">
               Nombres
@@ -22,7 +24,7 @@ export const Register = () => {
               type="text"
               name="names"
               id="name"
-              className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
+              className="border w-full  px-3 py-5 mt-4 md:mt-[1.7rem] md:px-6 hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
               placeholder="Jhon"
               required
             />
@@ -41,7 +43,7 @@ export const Register = () => {
               id="last_names"
               type="text"
               name="last_names"
-              className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
+              className="border w-full  px-3 py-5 mt-4 md:mt-[1.7rem] md:px-6 hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
               placeholder="Doeh Smith"
             />
             {errors.last_names && (
@@ -53,7 +55,7 @@ export const Register = () => {
             <input
               type="email"
               name="email"
-              className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
+              className="border w-full  px-3 py-5 mt-4 md:mt-[1.7rem] md:px-6 hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
               placeholder="example@example.com"
               required
             />
@@ -68,7 +70,7 @@ export const Register = () => {
             <input
               type="password"
               name="password"
-              className="border w-full h-5 px-3 py-5 mt-2 md:mt-[1.7rem] md:px-[2rem] md:py-[2.5rem] hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
+              className="border w-full  px-3 py-5 mt-4 md:mt-[1.7rem] md:px-6 hover:outline-none  ring-secondary ring-1 rounded-md text-[1.7rem]"
               placeholder="*******"
               required
             />
@@ -77,7 +79,7 @@ export const Register = () => {
             )}
           </div>
 
-          <div className="flex  flex-col gap-16  w-full mt-8">
+          <div className="flex  flex-col gap-10  w-full mt-8">
             <button
               className="bg-secondary hover:bg-secondary/80 mx-auto text-white font-bold text-3xl ease-in duration-75 transition-all py-4 px-6 rounded w-80"
               id="login"
@@ -87,7 +89,7 @@ export const Register = () => {
             </button>
             <Link
               to={"/auth/login"}
-              className="text-sm hover:underline md:text-[1.7rem] justify-self-end"
+              className="text-[1.3rem] hover:underline md:text-[1.7rem]"
             >
               Ya tienes una cuenta? Ingresa aquí
             </Link>

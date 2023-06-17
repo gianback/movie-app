@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, SwiperOptions } from "swiper";
@@ -25,21 +25,20 @@ const swiperOptions: SwiperOptions = {
     nextEl: ".Gallery-next",
   },
   breakpoints: {
-    768: {
-      slidesPerView: 2,
+    0: {
+      slidesPerView: 1.5,
     },
-    1024: {
+    568: {
+      slidesPerView: 2.5,
+    },
+    768: {
       slidesPerView: 3,
     },
     1200: {
-      slidesPerView: 3,
+      slidesPerView: 4,
       spaceBetween: 44,
     },
     1400: {
-      slidesPerView: 3,
-      spaceBetween: 50,
-    },
-    1700: {
       slidesPerView: 5,
       spaceBetween: 61,
     },
@@ -54,16 +53,23 @@ export const MainBanner = ({ movies }: MainBannerProps) => {
     setTimeout(() => {
       setIndexCurrentMovie(index);
       document.querySelector(".MainBanner-movie")?.classList.add("fadeIn");
-    }, 300);
+    }, 350);
   };
 
   return (
     <div className="MainBanner">
       <Container>
-        <h1 className="text-[3rem] text-white font-bold mb-24 max-w-[50ch] text-center mx-auto">
-          ¡Movie App, donde puedes ver las reviews de películas y series de
-          nuestros usuarios SIN SPOILERS!
+        <h1 className="text-[2.3rem] xl:-tracking-tighter xl:text-[3rem] text-white font-bold mb-4 xl:mb-20  xl:text-center mx-auto">
+          Descubre reseñas sin spoilers y disfruta del mundo del cine y las
+          series
         </h1>
+        <p className="hidden xl:block text-[1.8rem] xl:text-[2rem] text-white font-medium xl:text-center">
+          Movie App es una innovadora plataforma que permite a los usuarios leer
+          reseñas y opiniones de películas y series sin spoilers. Proporciona
+          recomendaciones detalladas y confiables, garantizando que los usuarios
+          puedan sumergirse en el mundo del cine y las series sin temor a
+          revelaciones no deseadas.
+        </p>
         <MainMovieBanner movie={movies[indexCurrentMovie]} />
       </Container>
       <div className="MainBanner-movie-swiper">
