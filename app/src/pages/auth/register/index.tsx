@@ -8,12 +8,12 @@ export const Register = () => {
 
   return (
     <>
-      <div className="w-screen h-screen flex justify-center items-center bg-gray-100">
+      <div className="w-full py-12 min-h-screen flex justify-center items-center bg-gray-100">
         <form
           className="p-10 bg-white rounded flex justify-center items-center flex-col shadow-md gap-8 w-[65rem]"
           onSubmit={handleRegister}
         >
-          <h1 className="text-[3rem] font-light ">Register</h1>
+          <h1 className="text-[3rem] font-light ">Registro</h1>
           <div className="w-full">
             <label htmlFor="name" className="block font-semibold text-[1.9rem]">
               Nombres
@@ -49,7 +49,7 @@ export const Register = () => {
             )}
           </div>
           <div className="w-full">
-            <label className="block font-semibold text-[1.9rem]">Email</label>
+            <label className="block font-semibold text-[1.9rem]">Correo</label>
             <input
               type="email"
               name="email"
@@ -89,7 +89,7 @@ export const Register = () => {
               to={"/auth/login"}
               className="text-sm hover:underline md:text-[1.7rem] justify-self-end"
             >
-              You already have an account? Log in
+              Ya tienes una cuenta? Ingresa aquí
             </Link>
           </div>
         </form>

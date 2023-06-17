@@ -7,14 +7,14 @@ export const Login = () => {
 
   return (
     <div className="relative flex min-h-screen text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
-      <div className="relative py-3 sm:w-[25%] mx-auto text-center">
-        <h1 className="text-[3rem] font-light ">Login to your account</h1>
+      <div className="relative py-3 sm:w-[35%] mx-auto text-center">
+        <h1 className="text-[3rem] font-light ">Ingresa a tu cuenta </h1>
         <form
           onSubmit={handleLogin}
           className="mt-4 bg-white shadow-lg rounded-lg text-left"
         >
           <div className="px-10 py-10 ">
-            <label className="block font-semibold text-[1.9rem]">Email</label>
+            <label className="block font-semibold text-[1.9rem]">Correo</label>
             <input
               type="email"
               name="email"
