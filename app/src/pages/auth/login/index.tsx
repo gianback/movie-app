@@ -36,7 +36,7 @@ export const Login = () => {
               required
             />
             {error && <p className="text-red-500 text-2xl mt-2">{error}</p>}
-            <div className="flex flex-col md:flex-row gap-10  justify-between items-baseline mt-8">
+            <div className="flex flex-col gap-10  justify-between items-baseline mt-8">
               <button className="mt-4 mx-auto bg-secondary text-white py-2 px-6 rounded-md hover:bg-secondary/80 text-[2rem]">
                 Iniciar sesión
               </button>

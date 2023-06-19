@@ -1,0 +1,15 @@
+.Navbar {
+  &-mobile {
+    @apply bg-red-500 flex flex-col gap-[2rem];
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    transition: transform 0.5s ease;
+    transform: translateY(-100%);
+    &.active {
+      transform: translateY(0);
+    }
+  }
+}

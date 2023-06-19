@@ -1,5 +1,8 @@
 .Header {
   /*/@apply overflow-x-hidden overflow-y-visible;*/
+  &-container{
+    @apply flex justify-between;
+  }
   &-options {
     @apply relative;
     &.isActive {
@@ -22,12 +25,5 @@
     }
   }
 
-  &-overlay {
-    @apply min-h-screen bg-black opacity-0 fixed inset-0;
-    transition: opacity 0.5s ease;
-    z-index: -1;
-    &.active {
-      opacity: 1;
-    }
-  }
+  
 }

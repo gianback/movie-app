@@ -1,5 +1,5 @@
 .MainBanner {
-  @apply bg-primary py-[5rem];
+  @apply bg-primary py-[2rem] xl:py-[5rem];
   min-height: 100vh;
 
   &-movie {

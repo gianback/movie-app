@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 const menuList = [
@@ -8,9 +8,13 @@ const menuList = [
     url: "/",
   },
 ];
-export function MenuList() {
+
+type MenuListProps = {
+  children?: ReactNode;
+};
+export function MenuList({ children }: MenuListProps) {
   return (
-    <ul className="flex items-center justify-center gap-[10rem] font-medium">
+    <ul className="flex flex-col items-center justify-center gap-[10rem] font-medium">
       {menuList.map(({ id, title, url }) => (
         <Link
           to={url}
@@ -20,6 +24,7 @@ export function MenuList() {
           {title}
         </Link>
       ))}
+      {children}
     </ul>
   );
 }

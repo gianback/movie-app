@@ -6,7 +6,7 @@ html {
   font-size: 62.5%;
 }
 body {
-  &.no-scroll {
+  &.scroll {
     @apply overflow-hidden;
   }
 }
@@ -46,20 +46,20 @@ textarea {
 .menu-icon {
   @apply relative isolate;
   &.hamburguer {
-    height: 5.4rem;
-    width: 5.4rem;
+    height: 6rem;
+    width: 6rem;
     transition-property: background-color, height, width;
     transition-duration: 0.4s;
     transition-timing-function: ease;
-    @apply flex justify-center items-center relative cursor-pointer bg-primary;
+    @apply flex justify-center items-center relative cursor-pointer bg-secondary;
     @media screen(xl) {
       @apply hidden;
     }
     span {
-      height: 0.3rem;
-      width: 2.4rem;
+      height: 0.4rem;
+      width: 3.4rem;
       transition: transform 0.5s ease, background-color 0.5s ease;
-      @apply bg-secondary inline-block absolute mx-auto rounded-2xl;
+      @apply bg-primary inline-block absolute mx-auto rounded-2xl;
     }
     span:nth-child(1) {
       transform: translateY(-0.8rem);
@@ -71,12 +71,13 @@ textarea {
 
     /* Animacion cuando "isActive" es true */
     &.change {
-      width: 2.8rem;
-      height: 2.8rem;
-      border: 2px solid white;
+      width: 3.8rem;
+      height: 3.8rem;
+      border: 2px solid #070a52;
+      margin: auto 0;
       @apply bg-transparent rounded-full;
       span {
-        @apply bg-secondary;
+        @apply bg-primary;
       }
       span:nth-child(1) {
         transform: rotateZ(42.19deg) scale(0.45);
@@ -95,12 +96,15 @@ textarea {
       }
     }
   }
-
-  .bg-menu {
-    z-index: -1;
-    top: 0;
-    width: 4.5rem;
-    height: 8.5rem;
-    @apply absolute right-0 opacity-0;
+}
+.Overlay {
+  @apply min-h-screen bg-black/80 fixed inset-0;
+  transition: all 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 10;
+  &.isActive {
+    visibility: visible;
+    opacity: 1;
   }
 }

@@ -1,24 +1,28 @@
-import Container from "../globals/Container";
 import { Navbar } from "../molecules/Navbar";
 import { IconMenu } from "../atoms";
 import "../../styles/ui/Header.css";
-import { useState } from "react";
+import { useGeneralStore } from "../../stores/general/general.store";
+import { Container } from "../globals";
 
 export const Header = () => {
-  const [isMenuActive, setIsMenuActive] = useState(false);
+  const [isMenuActive, setIsMenuActive] = useGeneralStore((state) => [
+    state.isMenuActive,
+    state.setIsMenuActive,
+  ]);
 
   const setIsActive = () => {
-    document.querySelector("body")?.classList.add("scroll");
+    document.querySelector("body")?.classList.toggle("scroll");
     setIsMenuActive(!isMenuActive);
   };
 
   return (
     <header className={`bg-secondary Header text-white  sticky top-0 z-20`}>
       <Container>
-        <Navbar />
-        <IconMenu setIsActive={setIsActive} />
+        <div className="Header-container">
+          <Navbar />
+          <IconMenu setIsActive={setIsActive} isActive={isMenuActive} />
+        </div>
       </Container>
-      <div className="Header-overlay"></div>
     </header>
   );
 };
