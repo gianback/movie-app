@@ -6,7 +6,7 @@
     transition-property: background-color, height, width;
     transition-duration: 0.4s;
     transition-timing-function: ease;
-    @apply flex justify-center items-center relative cursor-pointer bg-red-500;
+    @apply flex justify-center items-center relative cursor-pointer;
     @media screen(xl) {
       @apply hidden;
     }

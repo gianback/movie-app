@@ -16,17 +16,25 @@ export function Navbar() {
   const { last_names, names } = useAuthStore((state) => state.profile);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
   const setToken = useAuthStore((state) => state.setToken);
-  const isMenuActive = useGeneralStore((state) => state.isMenuActive);
+  const [isMenuActive, setIsMenuActive] = useGeneralStore((state) => [
+    state.isMenuActive,
+    state.setIsMenuActive,
+  ]);
   const handleLogOut = () => {
     setIsAuth(false);
     handleProfileMenu(false);
     setToken("");
+    setIsActive();
   };
 
   const handleProfileMenu = (isActive: boolean) => {
     setisProfileMenuActive(isActive);
+    setIsActive();
   };
-
+  const setIsActive = () => {
+    document.querySelector("body")?.classList.toggle("scroll");
+    setIsMenuActive(!isMenuActive);
+  };
   return (
     <nav className="xl:flex justify-between items-center">
       <figure className="w-24 xl:w-36">
@@ -62,14 +70,20 @@ export function Navbar() {
         </div>
       </div>
       <div className={`Navbar-mobile ${isMenuActive && "active"}`}>
-        <MenuList>
-          <li className="text-xl">
-            <Link to={"/favorites"} onClick={() => handleProfileMenu(false)}>
+        <MenuList handleClick={setIsActive}>
+          <li className="text-2xl w-full font-medium px-[2rem] py-[1.5rem] border-t border-solid border-white">
+            <Link
+              to={"/favorites"}
+              className="block w-full"
+              onClick={() => handleProfileMenu(false)}
+            >
               Mis Peliculas Favoritas
             </Link>
           </li>
-          <li className="text-xl ">
-            <button onClick={handleLogOut}>Log out</button>
+          <li className="text-2xl font-medium px-[2rem] py-[1.5rem] border-t border-b border-solid border-white ">
+            <button className="block w-full text-left" onClick={handleLogOut}>
+              Log out
+            </button>
           </li>
         </MenuList>
       </div>

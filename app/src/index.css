@@ -34,17 +34,22 @@ textarea {
 }
 
 .Card-p {
-  height: 16rem;
+  height: 7rem;
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  @media screen(xl) {
+    height: 16rem;
+    -webkit-line-clamp: 6;
+  }
 }
 .Button {
   transition: all 0.5s ease;
 }
 .menu-icon {
   @apply relative isolate;
+  z-index: 21;
   &.hamburguer {
     height: 6rem;
     width: 6rem;
