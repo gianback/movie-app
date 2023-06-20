@@ -24,6 +24,7 @@ export function Navbar() {
     setIsAuth(false);
     handleProfileMenu(false);
     setToken("");
+
     setIsActive();
   };
 
@@ -36,12 +37,14 @@ export function Navbar() {
     setIsMenuActive(!isMenuActive);
   };
   return (
-    <nav className="xl:flex justify-between items-center">
-      <figure className="w-24 xl:w-36">
-        <img src={logo} alt="logo movie app" />
-      </figure>
-      <div className="hidden xl:flex gap-40">
-        <MenuList />
+    <nav className="xl:flex w-full justify-between items-center">
+      <div className="xl:flex gap-16">
+        <figure className="w-24 xl:w-36">
+          <img src={logo} alt="logo movie app" />
+        </figure>
+        <div className="hidden xl:flex gap-40">
+          <MenuList />
+        </div>
       </div>
 
       <div className={` hidden xl:flex gap-4 relative`}>
@@ -71,7 +74,7 @@ export function Navbar() {
       </div>
       <div className={`Navbar-mobile ${isMenuActive && "active"}`}>
         <MenuList handleClick={setIsActive}>
-          <li className="text-2xl w-full font-medium px-[2rem] py-[1.5rem] border-t border-solid border-white">
+          <li className="text-2xl w-full font-medium px-[2rem] py-[1.5rem] border-t  border-solid border-white">
             <Link
               to={"/favorites"}
               className="block w-full"

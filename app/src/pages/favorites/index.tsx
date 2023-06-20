@@ -4,6 +4,7 @@ import { FavoriteMovieList } from "../../components/organisms/FavoriteMovieList"
 import Container from "../../components/globals/Container";
 import { Movie } from "../../interfaces/Home";
 import { fetchMovieByUser } from "../../services/fetch.movies.service";
+import { Loader } from "../../components/atoms/Loader";
 
 export function Favorites() {
   const [favoriteMovieList, setFavoriteMovieList] = useState<Movie[]>([]);
@@ -33,7 +34,7 @@ export function Favorites() {
     <main className="min-h-[83.5vh] bg-primary py-20">
       <Container>
         {isLoading ? (
-          <p className="text-white">Cargando</p>
+          <Loader />
         ) : (
           <FavoriteMovieList
             updateMovies={getFavoritesMovie}

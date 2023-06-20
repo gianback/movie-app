@@ -21,7 +21,7 @@ export function CommentList({ comments }: CommentListProps) {
           ))}
         </ul>
       ) : (
-        <p className="uppercase text-5xl text-white text-center mt-20">
+        <p className="uppercase text-3xl xl:text-5xl text-white text-center mt-20">
           Escribe el primer comentario
         </p>
       )}

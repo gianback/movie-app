@@ -10,10 +10,12 @@ export function Comment({ content, date, qualification }: CommentProps) {
   return (
     <li className="flex justify-between gap-4">
       <div>
-        <p className="text-white text-3xl ">{"⭐".repeat(qualification)}</p>
-        <p className="text-white text-3xl ">{content}</p>
+        <p className="text-white text-xl xl:text-3xl ">
+          {"⭐".repeat(qualification)}
+        </p>
+        <p className="text-white text-xl xl:text-3xl ">{content}</p>
       </div>
-      <p className="text-white text-3xl flex-shrink-0 ">
+      <p className="text-white  text-xl xltext-3xl flex-shrink-0 ">
         {formatTime(date.toString())}
       </p>
     </li>

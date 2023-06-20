@@ -49,20 +49,20 @@ export function MovieDetails() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-primary py-[10rem]">
+    <main className="min-h-screen bg-primary py-[4rem] xlpy-[10rem]">
       <Container>
-        <section className="flex gap-32">
+        <section className="flex flex-col xl:flex-row gap-12 xl:gap-32">
           <div className="relative z-[1]">
-            <figure className="flex relative z-[1] justify-center  w-[40rem] mx-auto">
+            <figure className="flex relative z-[1] justify-center w-[20rem] max-w-100% xl:w-[40rem] mx-auto">
               <img src={image_primary.secure_url} className="w-full" />
             </figure>
           </div>
           <div className="text-white flex-col gap-8 flex justify-center">
-            <h2 className="text-5xl font-medium">{title}</h2>
-            <p className="text-3xl leading-[2.8rem] font-medium">
+            <h2 className="text-4xl xl:text-5xl font-medium">{title}</h2>
+            <p className="text-[1.4rem] xl:text-3xl leading-[1.8rem] xl:leading-[2.8rem] font-medium">
               {description}
             </p>
-            <div className="flex gap-16 mt-[3rem]">
+            <div className="flex gap-4 xl:gap-16 mt-[3rem]">
               <Button url="/" type="secondary">
                 Ver mas peliculas
               </Button>
@@ -81,7 +81,9 @@ export function MovieDetails() {
           </div>
         </section>
         <section className="mt-20">
-          <h2 className="text-6xl text-white font-bold">Comentarios</h2>
+          <h2 className="text-4xl xl:text-6xl text-white font-bold">
+            Comentarios:
+          </h2>
           <CommentList comments={comments} />
           <FormComment _id={_id} setComments={setComments} />
         </section>

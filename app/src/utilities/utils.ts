@@ -1,8 +1,6 @@
-import { fetchMovieByUser } from "../services/fetch.movies.service";
-
-export const showErrors = (errors, setErrors) => {
+export const showErrors = (errors: any, setErrors: any) => {
   for (const key in errors) {
-    setErrors((prevState) => {
+    setErrors((prevState: any) => {
       return {
         ...prevState,
         [key]: "This field is required",
@@ -34,4 +32,8 @@ export const formatTime = (date: string): string => {
     hour: "numeric",
     minute: "numeric",
   }).format(newDate);
+};
+
+export const scrollToTop = () => {
+  window.scrollTo({ behavior: "smooth", top: 0 });
 };

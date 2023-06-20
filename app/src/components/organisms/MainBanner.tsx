@@ -7,6 +7,7 @@ import Container from "../globals/Container";
 import { Movie } from "../../interfaces/Home";
 import { MainMovieBanner } from "../molecules";
 import "../../styles/home/MainBanner.css";
+import { scrollToTop } from "../../utilities/utils";
 interface MainBannerProps {
   movies: Movie[];
 }
@@ -53,6 +54,7 @@ export const MainBanner = ({ movies }: MainBannerProps) => {
     setTimeout(() => {
       setIndexCurrentMovie(index);
       document.querySelector(".MainBanner-movie")?.classList.add("fadeIn");
+      scrollToTop();
     }, 350);
   };
 

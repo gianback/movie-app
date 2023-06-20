@@ -107,6 +107,7 @@ export const Register = () => {
         draggable
         pauseOnHover={false}
         theme="dark"
+        limit={1}
       />
     </>
   );
