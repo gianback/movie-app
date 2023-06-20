@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
 import Comment from "../models/Comment";
-import Movie from "../models/Movie";
+import { Movie } from "../models/Movie";
 
 export const createComment = async (req: Request, res: Response) => {
   const { payload, qualification, movieId } = req.body.formData;
