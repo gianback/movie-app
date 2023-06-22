@@ -7,6 +7,7 @@ import {
   verifyTokenRoutes,
   authRoutes,
 } from "./routes";
+import { CLIENT_URL } from "./config";
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.use(
 //cors
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: CLIENT_URL,
     credentials: true,
   })
 );

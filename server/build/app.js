@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const routes_1 = require("./routes");
+const config_1 = require("./config");
 const app = (0, express_1.default)();
 //middlewares
 app.use(express_1.default.json());
@@ -17,7 +18,7 @@ app.use((0, express_fileupload_1.default)({
 }));
 //cors
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: config_1.CLIENT_URL,
     credentials: true,
 }));
 app.use("/api", routes_1.moviesRoutes);
