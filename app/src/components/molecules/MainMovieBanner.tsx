@@ -26,12 +26,16 @@ export const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
               <img
                 src={movie.image_primary.secure_url}
                 alt={`${movie.title} Image`}
+                width={700}
+                height={700}
               />
             </picture>
             <picture>
               <img
                 src={movie.image_secondary.secure_url}
                 alt={`${movie.title} Image`}
+                width={700}
+                height={700}
               />
             </picture>
           </div>

@@ -50,12 +50,8 @@ const swiperOptions: SwiperOptions = {
 export const MainBanner = ({ movies }: MainBannerProps) => {
   const [indexCurrentMovie, setIndexCurrentMovie] = useState<number>(0);
   const handleClickMovie = (index: number) => {
-    document.querySelector(".MainBanner-movie")?.classList.remove("fadeIn");
-    setTimeout(() => {
-      setIndexCurrentMovie(index);
-      document.querySelector(".MainBanner-movie")?.classList.add("fadeIn");
-      scrollToTop();
-    }, 350);
+    setIndexCurrentMovie(index);
+    // scrollToTop();
   };
 
   return (
@@ -72,7 +68,10 @@ export const MainBanner = ({ movies }: MainBannerProps) => {
           puedan sumergirse en el mundo del cine y las series sin temor a
           revelaciones no deseadas.
         </p>
-        <MainMovieBanner movie={movies[indexCurrentMovie]} />
+        <MainMovieBanner
+          key={indexCurrentMovie}
+          movie={movies[indexCurrentMovie]}
+        />
       </Container>
       <div className="MainBanner-movie-swiper">
         <Swiper {...swiperOptions}>

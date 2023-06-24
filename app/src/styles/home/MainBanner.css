@@ -4,10 +4,12 @@
 
   &-movie {
     @apply grid md:grid-cols-2 gap-10 xl:gap-[8rem] mt-12 xl:mt-24;
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
+    /* opacity: 0; */
+    /* transition: opacity 0.3s ease-in; */
+    animation-name: fadeIn;
+    animation-duration: 0.75s;
     &.fadeIn {
-      opacity: 1;
+      /* opacity: 1; */
     }
 
     &-pictures {
