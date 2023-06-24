@@ -17,10 +17,9 @@ export function MenuList({ children, handleClick }: MenuListProps) {
   return (
     <ul className="flex flex-col  justify-center items-left xl:items-center  xl:p-[0]  pt-[10rem] pb-[4rem]  xl:gap-[10rem] font-medium">
       {menuList.map(({ id, title, url }) => (
-        <li className="text-2xl xl:text-[1.5rem] xl:uppercase tracking-wider px-[2rem] py-[1rem] border-t xl:border-none border-solid border-white">
+        <li key={id} className="text-2xl xl:text-[1.5rem] xl:uppercase tracking-wider px-[2rem] py-[1rem] border-t xl:border-none border-solid border-white">
           <Link
             to={url}
-            key={id}
             onClick={handleClick}
             className="w-full block"
           >
