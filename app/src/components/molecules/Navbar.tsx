@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //hooks
 import { useAuthStore } from "../../stores/auth/authStore";
 //components
@@ -16,9 +16,11 @@ export function Navbar() {
   const { last_names, names } = useAuthStore((state) => state.profile);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
   const setToken = useAuthStore((state) => state.setToken);
-  const [isMenuActive, setIsMenuActive] = useGeneralStore((state) => [
+  const [isMenuActive, setIsMenuActive,witdhWindow,setWithWindow] = useGeneralStore((state) => [
     state.isMenuActive,
     state.setIsMenuActive,
+    state.witdhWindow,
+    state.setWithWindow
   ]);
   const handleLogOut = () => {
     setIsAuth(false);
@@ -30,12 +32,17 @@ export function Navbar() {
 
   const handleProfileMenu = (isActive: boolean) => {
     setisProfileMenuActive(isActive);
-    setIsActive();
   };
   const setIsActive = () => {
     document.querySelector("body")?.classList.toggle("scroll");
     setIsMenuActive(!isMenuActive);
   };
+
+  useEffect(() => {
+    setWithWindow(window.innerWidth)
+  }, [])
+  
+
   return (
     <nav className="xl:flex w-full justify-between items-center">
       <div className="xl:flex gap-16">
@@ -72,6 +79,8 @@ export function Navbar() {
           <span>{last_names}</span>
         </div>
       </div>
+      {
+        witdhWindow < 1281 &&
       <div className={`Navbar-mobile ${isMenuActive && "active"}`}>
         <MenuList handleClick={setIsActive}>
           <li className="text-2xl w-full font-medium px-[2rem] py-[1.5rem] border-t  border-solid border-white">
@@ -90,6 +99,9 @@ export function Navbar() {
           </li>
         </MenuList>
       </div>
+      }
+
     </nav>
+
   );
 }
