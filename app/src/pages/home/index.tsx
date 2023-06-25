@@ -8,7 +8,7 @@ interface LoaderData {
   movies: Movie[];
 }
 
-export const HomePage = () => {
+export default function HomePage() {
   const { movies } = useLoaderData() as LoaderData;
 
   return (
@@ -16,7 +16,7 @@ export const HomePage = () => {
       <MainBanner movies={movies} />
     </main>
   );
-};
+}
 
 export const loaderHomeMovies = async () => {
   const movies = await fetchMovies();

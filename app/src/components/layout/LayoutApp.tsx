@@ -5,7 +5,7 @@ import { useAuthStore } from "../../stores/auth/authStore";
 import { useGeneralStore } from "../../stores/general/general.store";
 import { verifyToken } from "../../services/verify.token.service";
 
-const LayoutApp: FC<PropsWithChildren> = () => {
+export default function LayoutApp() {
   const isAuth = useAuthStore((state) => state.isAuth);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
   const [isMenuActive, setIsMenuActive] = useGeneralStore((state) => [
@@ -15,8 +15,8 @@ const LayoutApp: FC<PropsWithChildren> = () => {
   const location = useLocation();
   const verifyAppLayout = async () => {
     try {
-      const { data } = await verifyToken();
-      if (data.status === 200 && !isAuth) {
+      const response = await verifyToken();
+      if (response.data.status === 200 && !isAuth) {
         setIsAuth(true);
       }
     } catch (error) {
@@ -41,14 +41,12 @@ const LayoutApp: FC<PropsWithChildren> = () => {
           <div
             onClick={setIsActive}
             className={`Overlay ${isMenuActive && "isActive"}`}
-          ></div>
+          />
           <Footer />
         </>
       ) : (
-        <Navigate to={"/auth/login"} state={{ from: location }} replace />
+        <Navigate to={"/auth/login"} state={{ from: location }} />
       )}
     </>
   );
-};
-
-export default LayoutApp;
+}

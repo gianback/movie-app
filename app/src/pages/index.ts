@@ -1,6 +1,7 @@
-export * from "./auth/login";
-export * from "./auth/register";
+export { default as Login } from "./auth/login";
+export { default as Register } from "./auth/register";
 export * from "./error";
-export * from "./favorites";
-export * from "./home";
-export * from "./movie";
+export { default as Favorites } from "./favorites";
+export { default as Home } from "./home";
+export * from "./index";
+export { default as Movie } from "./movie";

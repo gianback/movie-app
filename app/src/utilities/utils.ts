@@ -35,5 +35,11 @@ export const formatTime = (date: string): string => {
 };
 
 export const scrollToTop = () => {
-  window.scrollTo({ behavior: "smooth", top: 0 });
+  const banner = document.querySelector(".MainBanner-movie") as Element,
+    offsetTop = banner.getBoundingClientRect().top + window.scrollY - 150;
+
+  window.scrollTo({
+    top: 200,
+    behavior: "smooth",
+  });
 };

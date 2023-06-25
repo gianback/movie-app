@@ -6,7 +6,7 @@ import { Movie } from "../../interfaces/Home";
 import { fetchMovieByUser } from "../../services/fetch.movies.service";
 import { Loader } from "../../components/atoms/Loader";
 
-export function Favorites() {
+export default function Favorites() {
   const [favoriteMovieList, setFavoriteMovieList] = useState<Movie[]>([]);
   const { uid } = useAuthStore((state) => state.profile);
   const [isLoading, setIsLoading] = useState(false);

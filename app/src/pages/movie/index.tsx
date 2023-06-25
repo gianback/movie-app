@@ -16,7 +16,7 @@ interface MovieDetailsLoader {
   movie: Movie;
 }
 
-export function MovieDetails() {
+export default function MovieDetails() {
   const { movie } = useLoaderData() as MovieDetailsLoader;
   const { verifyFavoriteMovie, isLoading, updateFavoriteMovieList } =
     useFavoriteMovie();

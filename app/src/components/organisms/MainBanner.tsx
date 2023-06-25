@@ -51,7 +51,7 @@ export const MainBanner = ({ movies }: MainBannerProps) => {
   const [indexCurrentMovie, setIndexCurrentMovie] = useState<number>(0);
   const handleClickMovie = (index: number) => {
     setIndexCurrentMovie(index);
-    // scrollToTop();
+    scrollToTop();
   };
 
   return (

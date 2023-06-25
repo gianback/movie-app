@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useLoginForm } from "../../../hooks/useLoginForm";
-export const Login = () => {
+export default function Login() {
   const { error, handleLogin } = useLoginForm();
 
   return (
@@ -52,4 +52,4 @@ export const Login = () => {
       </div>
     </div>
   );
-};
+}

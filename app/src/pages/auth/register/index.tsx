@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useRegisterForm } from "../../../hooks/useRegisterForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export const Register = () => {
+export default function Register() {
   const { handleRegister, errors } = useRegisterForm();
 
   return (
@@ -111,4 +111,4 @@ export const Register = () => {
       />
     </>
   );
-};
+}

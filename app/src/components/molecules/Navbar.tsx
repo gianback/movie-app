@@ -13,15 +13,18 @@ import "../../styles/molecules/Navbar.css";
 
 export function Navbar() {
   const [isProfileMenuActive, setisProfileMenuActive] = useState(false);
-  const { last_names, names } = useAuthStore((state) => state.profile);
-  const setIsAuth = useAuthStore((state) => state.setIsAuth);
-  const setToken = useAuthStore((state) => state.setToken);
-  const [isMenuActive, setIsMenuActive,witdhWindow,setWithWindow] = useGeneralStore((state) => [
-    state.isMenuActive,
-    state.setIsMenuActive,
-    state.witdhWindow,
-    state.setWithWindow
+  const [setIsAuth, setToken, { last_names, names }] = useAuthStore((state) => [
+    state.setIsAuth,
+    state.setToken,
+    state.profile,
   ]);
+  const [isMenuActive, setIsMenuActive, witdhWindow, setWithWindow] =
+    useGeneralStore((state) => [
+      state.isMenuActive,
+      state.setIsMenuActive,
+      state.witdhWindow,
+      state.setWithWindow,
+    ]);
   const handleLogOut = () => {
     setIsAuth(false);
     handleProfileMenu(false);
@@ -39,9 +42,8 @@ export function Navbar() {
   };
 
   useEffect(() => {
-    setWithWindow(window.innerWidth)
-  }, [])
-  
+    setWithWindow(window.innerWidth);
+  }, []);
 
   return (
     <nav className="xl:flex w-full justify-between items-center">
@@ -79,29 +81,26 @@ export function Navbar() {
           <span>{last_names}</span>
         </div>
       </div>
-      {
-        witdhWindow < 1281 &&
-      <div className={`Navbar-mobile ${isMenuActive && "active"}`}>
-        <MenuList handleClick={setIsActive}>
-          <li className="text-2xl w-full font-medium px-[2rem] py-[1.5rem] border-t  border-solid border-white">
-            <Link
-              to={"/favorites"}
-              className="block w-full"
-              onClick={() => handleProfileMenu(false)}
-            >
-              Mis Peliculas Favoritas
-            </Link>
-          </li>
-          <li className="text-2xl font-medium px-[2rem] py-[1.5rem] border-t border-b border-solid border-white ">
-            <button className="block w-full text-left" onClick={handleLogOut}>
-              Log out
-            </button>
-          </li>
-        </MenuList>
-      </div>
-      }
-
+      {witdhWindow < 1281 && (
+        <div className={`Navbar-mobile ${isMenuActive && "active"}`}>
+          <MenuList handleClick={setIsActive}>
+            <li className="text-2xl w-full font-medium px-[2rem] py-[1.5rem] border-t  border-solid border-white">
+              <Link
+                to={"/favorites"}
+                className="block w-full"
+                onClick={() => handleProfileMenu(false)}
+              >
+                Mis Peliculas Favoritas
+              </Link>
+            </li>
+            <li className="text-2xl font-medium px-[2rem] py-[1.5rem] border-t border-b border-solid border-white ">
+              <button className="block w-full text-left" onClick={handleLogOut}>
+                Log out
+              </button>
+            </li>
+          </MenuList>
+        </div>
+      )}
     </nav>
-
   );
 }
