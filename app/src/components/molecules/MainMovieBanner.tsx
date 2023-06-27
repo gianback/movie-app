@@ -15,7 +15,7 @@ export const MainMovieBanner = ({ movie }: MainMovieBannerProps) => {
   return (
     <>
       {movie && (
-        <div className={`MainBanner-movie fadeIn`}>
+        <div className={`MainBanner-movie xl:min-h-[65vh] fadeIn`}>
           {windowWidth < 1279 && (
             <h2 className="text-white text-[2.2rem] xl:text-[7rem] md:hidden xl:leading-[8rem] mb-[3rem];">
               {movie.title}

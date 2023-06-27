@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRegisterForm } from "../../../hooks/useRegisterForm";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "sonner";
 export default function Register() {
   const { handleRegister, errors } = useRegisterForm();
 
   return (
     <>
+      <Toaster position="bottom-right" richColors />
       <div className="w-full py-20 flex-col min-h-screen flex justify-center items-center bg-gray-100">
         <h1 className="text-[2.5rem] xl:text-[3rem] font-medium uppercase  ">
           Registro
@@ -96,19 +96,6 @@ export default function Register() {
           </div>
         </form>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="dark"
-        limit={1}
-      />
     </>
   );
 }

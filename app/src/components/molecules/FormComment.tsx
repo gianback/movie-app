@@ -3,36 +3,8 @@ import { loadComments, saveComment } from "../../sockets/movie.socket";
 import { useAuthStore } from "../../stores/auth/authStore";
 import { Comment } from "../../interfaces/Home";
 import { Button } from "../atoms";
-import { ToastContainer, ToastOptions, toast } from "react-toastify";
+import { Toaster, toast } from "sonner";
 
-const toastConfigMssgSuccess: ToastOptions = {
-  position: "top-center",
-  autoClose: 3000,
-  type: "success",
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: false,
-  draggable: true,
-  progress: undefined,
-  theme: "light",
-  style: {
-    fontSize: "16px",
-  },
-};
-const toastConfigMssgError: ToastOptions = {
-  position: "top-center",
-  autoClose: 2500,
-  type: "error",
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: false,
-  draggable: true,
-  progress: undefined,
-  theme: "light",
-  style: {
-    fontSize: "16px",
-  },
-};
 type FormCommentProps = {
   _id: string;
   setComments: Dispatch<SetStateAction<Comment[]>>;
@@ -48,7 +20,7 @@ export function FormComment({ _id, setComments }: FormCommentProps) {
     const formData = new FormData(e.currentTarget);
     const objectFormData = Object.fromEntries(formData);
     if (!objectFormData["content"] || !qualification) {
-      toast("Por favor llena todos los campos", toastConfigMssgError);
+      toast.error("Por favor llena todos los campos");
     } else {
       const payload = {
         content: formData.get("content"),
@@ -60,24 +32,12 @@ export function FormComment({ _id, setComments }: FormCommentProps) {
       loadComments(setComments);
 
       form.reset();
-      toast("¡El comentario ha sido agregado!", toastConfigMssgSuccess);
+      toast.success("¡El comentario ha sido agregado!");
     }
   };
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="dark"
-        limit={1}
-      />
+      <Toaster richColors position="bottom-right" />
       <form onSubmit={handleSubmitComment} className="mt-12">
         <textarea
           className="text-2xl py-6 px-4 rounded-md"

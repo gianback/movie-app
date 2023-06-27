@@ -5,7 +5,7 @@ const menuList = [
   {
     id: 1,
     title: "Home",
-    url: "/home",
+    url: "/",
   },
 ];
 

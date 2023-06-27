@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 import { Container } from "../../components/globals";
 import { Button } from "../../components/atoms";
@@ -38,8 +39,10 @@ export default function MovieDetails() {
     const { action } = await updateFavoriteMovieList(_id);
     if (action === "added") {
       setisFavoriteMovie("Eliminar de mis favoritos");
+      toast.success("Película agregada a mis favoritos");
     } else {
       setisFavoriteMovie("Agregar a mis favoritos");
+      toast.error("Película eliminada de mis favoritos");
     }
   };
 
@@ -88,6 +91,7 @@ export default function MovieDetails() {
           <FormComment _id={_id} setComments={setComments} />
         </section>
       </Container>
+      <Toaster position="bottom-right" richColors />
     </main>
   );
 }

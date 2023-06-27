@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useLoginForm } from "../../../hooks/useLoginForm";
+import { Loader } from "../../../components/atoms";
 export default function Login() {
-  const { error, handleLogin } = useLoginForm();
+  const { error, handleLogin, loading } = useLoginForm();
 
   return (
     <div className="relative bg-gray-100 flex min-h-screen text-gray-800 antialiased flex-col justify-center overflow-hidden py-6 sm:py-12">
@@ -35,14 +36,26 @@ export default function Login() {
               placeholder="Contraseña"
               required
             />
-            {error && <p className="text-red-500 text-2xl mt-2">{error}</p>}
-            <div className="flex flex-col gap-10  justify-between items-baseline mt-8">
-              <button className="mt-4 mx-auto bg-secondary text-white py-2 px-6 rounded-md hover:bg-secondary/80 text-[2rem]">
+            <div className="flex flex-col justify-between items-baseline mt-8 relative">
+              <button
+                className={`mt-4 mx-auto bg-secondary text-white py-2 px-6 rounded-md ${
+                  !loading && "hover:bg-secondary/80"
+                } text-[2rem]`}
+                disabled={loading}
+              >
                 Iniciar sesión
               </button>
+              {error && (
+                <p className="text-red-500 text-2xl mt-6 mb-2">{error}</p>
+              )}
+              {loading && (
+                <div className="absolute right-0 sm:right-[20%] top-[40%]  translate-y-[-50%]">
+                  <Loader />
+                </div>
+              )}
               <Link
                 to={"/auth/register"}
-                className="text-[1.3rem] hover:underline md:text-[1.7rem]"
+                className="text-[1.3rem] hover:underline mt-4 md:text-[1.7rem]"
               >
                 You don't have an account?
               </Link>

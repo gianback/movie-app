@@ -6,6 +6,7 @@ import { BASE_URL } from "../utilities/constants";
 
 export const useLoginForm = () => {
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ export const useLoginForm = () => {
     };
 
     try {
+      setLoading(true);
       const { data: token } = await axios.post(`${BASE_URL}auth/login`, {
         user: userData,
       });
@@ -37,11 +39,14 @@ export const useLoginForm = () => {
       setTimeout(() => {
         setError("");
       }, 3000);
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
     error,
     handleLogin,
+    loading,
   };
 };

@@ -1,6 +1,6 @@
 .Header {
   /*/@apply overflow-x-hidden overflow-y-visible;*/
-  &-container{
+  &-container {
     @apply flex justify-between;
   }
   &-options {
@@ -16,14 +16,16 @@
       top: 100%;
       transition: all 0.5s ease;
       li {
-        @apply px-4 py-4 flex items-center;
+        @apply flex items-center;
         transition: background 0.5s ease;
+        a,
+        button {
+          @apply p-4;
+        }
         &:hover {
           @apply bg-secondary;
         }
       }
     }
   }
-
-  
 }

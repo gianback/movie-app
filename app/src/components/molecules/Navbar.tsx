@@ -29,7 +29,6 @@ export function Navbar() {
     setIsAuth(false);
     handleProfileMenu(false);
     setToken("");
-
     setIsActive();
   };
 
@@ -38,7 +37,7 @@ export function Navbar() {
   };
   const setIsActive = () => {
     document.querySelector("body")?.classList.toggle("scroll");
-    setIsMenuActive(!isMenuActive);
+    isMenuActive && setIsMenuActive(!isMenuActive);
   };
 
   useEffect(() => {

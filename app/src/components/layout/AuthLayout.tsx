@@ -9,7 +9,7 @@ export default function AuthLayout() {
   return (
     <>
       {isAuth ? (
-        <Navigate to={"/home"} state={{ from: location }} replace />
+        <Navigate to={"/"} state={{ from: location }} replace />
       ) : (
         <>
           <Outlet />

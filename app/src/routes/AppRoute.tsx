@@ -7,31 +7,31 @@ import {
 
 import { loaderDetailsMovies } from "../pages/movie";
 import { loaderHomeMovies } from "../pages/home";
+import { AuthLayout, LayoutApp as AppLayout } from "../components/layout";
 import { Error404 } from "../pages/error";
+import { Loader } from "../components/atoms";
 
 const Home = lazy(() => import("../pages/home"));
 const Favorites = lazy(() => import("../pages/favorites"));
 const Login = lazy(() => import("../pages/auth/login"));
 const MovieDetails = lazy(() => import("../pages/movie"));
 const Register = lazy(() => import("../pages/auth/register"));
-const AppLayout = lazy(() => import("../components/layout/LayoutApp"));
-const AuthLayout = lazy(() => import("../components/layout/AuthLayout"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route
-        element={
-          <Suspense fallback={<p>Cargando Layoutapp</p>}>
-            <AppLayout />
-          </Suspense>
-        }
-      >
+      <Route element={<AppLayout />}>
         <Route
-          path="/home"
+          path="/"
           loader={loaderHomeMovies}
           element={
-            <Suspense fallback={<p>Cargando Home</p>}>
+            <Suspense
+              fallback={
+                <div className="min-h-screen flex justify-center pt-20 bg-primary">
+                  <Loader />
+                </div>
+              }
+            >
               <Home />
             </Suspense>
           }
@@ -39,7 +39,13 @@ const router = createBrowserRouter(
         <Route
           path="/favorites"
           element={
-            <Suspense fallback={<p>Cargando Favorites</p>}>
+            <Suspense
+              fallback={
+                <div className="min-h-screen flex justify-center pt-20 bg-primary">
+                  <Loader />
+                </div>
+              }
+            >
               <Favorites />
             </Suspense>
           }
@@ -48,23 +54,29 @@ const router = createBrowserRouter(
           path="/movies/:id"
           loader={loaderDetailsMovies}
           element={
-            <Suspense fallback={<p>Cargando Movie</p>}>
+            <Suspense
+              fallback={
+                <div className="min-h-screen flex justify-center pt-20 bg-primary">
+                  <Loader />
+                </div>
+              }
+            >
               <MovieDetails />
             </Suspense>
           }
         />
       </Route>
-      <Route
-        element={
-          <Suspense fallback={<p>Cargando authLayout</p>}>
-            <AuthLayout />
-          </Suspense>
-        }
-      >
+      <Route element={<AuthLayout />}>
         <Route
           path="/auth/login"
           element={
-            <Suspense fallback={<p>Cargando login</p>}>
+            <Suspense
+              fallback={
+                <div className="min-h-screen flex pt-20 justify-center">
+                  <Loader />
+                </div>
+              }
+            >
               <Login />
             </Suspense>
           }
@@ -72,7 +84,13 @@ const router = createBrowserRouter(
         <Route
           path="/auth/register"
           element={
-            <Suspense fallback={<p>Cargando register</p>}>
+            <Suspense
+              fallback={
+                <div className="min-h-screen flex justify-center pt-20 bg-primary">
+                  <Loader />
+                </div>
+              }
+            >
               <Register />
             </Suspense>
           }

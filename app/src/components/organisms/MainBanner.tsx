@@ -50,8 +50,8 @@ const swiperOptions: SwiperOptions = {
 export const MainBanner = ({ movies }: MainBannerProps) => {
   const [indexCurrentMovie, setIndexCurrentMovie] = useState<number>(0);
   const handleClickMovie = (index: number) => {
-    setIndexCurrentMovie(index);
     scrollToTop();
+    setIndexCurrentMovie(index);
   };
 
   return (
@@ -76,9 +76,12 @@ export const MainBanner = ({ movies }: MainBannerProps) => {
       <div className="MainBanner-movie-swiper">
         <Swiper {...swiperOptions}>
           {movies.map(({ title, image_secondary }, index) => (
-            <SwiperSlide key={index} onClick={() => handleClickMovie(index)}>
+            <SwiperSlide key={index}>
               <div>
-                <picture>
+                <picture
+                  onClick={() => handleClickMovie(index)}
+                  className="cursor-pointer"
+                >
                   <img src={image_secondary.secure_url} alt={title} />
                 </picture>
                 <h2>{title}</h2>
